@@ -1,5 +1,6 @@
 ﻿using MyMiniGame.Fighters;
 using System;
+using System.Text;
 
 namespace MyMiniGame
 {
@@ -17,23 +18,26 @@ namespace MyMiniGame
         public static Action<string> messager;
         static void Main(string[] args)
         {
+            bool end = false;
             messager += Messager.consoleMessage;
 
-            var Fighter = new Priest("Dima") {Ability = new Health() };
+            var Fighter = new Priest("Dima") {Color = ConsoleColor.Cyan};
+            var Fighter2 = new Priest("Monster") {Color = ConsoleColor.DarkMagenta};
 
-            var Fighter2 = new Priest("Monster");
-            Fighter.Ability = new Health();
 
-            Fighter.fighterFullInfo();
-            Console.WriteLine();
-
-            Console.WriteLine("Fighter {0} Health: {1}",Fighter.Name, Fighter.Health);
-            Console.WriteLine("Fighter {0} Health: {1}", Fighter2.Name, Fighter2.Health);
-            Fighter.SuperAbility(Fighter2);
-            Fighter.Attack(Fighter2);
-            Console.WriteLine("----------After Fight---------");
-            Console.WriteLine("Fighter {0} Health: {1}", Fighter.Name, Fighter.Health);
-            Console.WriteLine("Fighter {0} Health: {1}", Fighter2.Name, Fighter2.Health);
+            while(!end)
+            {
+                Fighter.fighterFullInfo();
+                Console.WriteLine(new String('-', 25));
+                Fighter.Attack(Fighter2);
+                Fighter.SuperAbility(Fighter2);
+                FightHelper.fightersNormalInfo(Fighter, Fighter2);
+                FightHelper.Reverse(ref Fighter, ref Fighter2);
+                if (Console.ReadLine() == "exit")
+                    end = true;
+                else
+                    Console.Clear();
+            }
         }
     }
 }

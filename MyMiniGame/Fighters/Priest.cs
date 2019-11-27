@@ -6,6 +6,9 @@ using MyMiniGame.Fighters.Abilitys.Interfaces;
 
 namespace MyMiniGame
 {
+    /// <summary>
+    /// Класс : Священник
+    /// </summary>
     class Priest : BaseFighter
     {
         public override string Class { get; set; } =  "Priest";
