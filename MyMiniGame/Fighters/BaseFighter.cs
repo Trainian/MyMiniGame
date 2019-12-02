@@ -3,10 +3,14 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace MyMiniGame
+namespace MyMiniGame.Fighters
 {
+    //TODO: Добавить Деньги
+    //TODO: Добавить Положительный и Отрицательые эффекты, возможно по несколько эффектов одновременно
+    //TODO: Исправить проверку соответсвия Абилки = Классу, реализовав перебор по разрешённым классам в Абилке
     public abstract class BaseFighter 
     {
+        private IAbility _ability;
         /// <summary>
         /// Имя персонажа, является идентификатором
         /// </summary>
@@ -18,7 +22,7 @@ namespace MyMiniGame
         /// <summary>
         /// Класс, определяет способности
         /// </summary>
-        public abstract string Class { get; set; }
+        public abstract Classes Class { get; set; }
         /// <summary>
         /// Уровень, каждый уровень даёт +3 очка
         /// </summary>
@@ -49,8 +53,17 @@ namespace MyMiniGame
         public abstract int Mana { get; set; }
         /// <summary>
         /// Спецспособность
+        /// Каждый класс может иметь только свои Способности
         /// </summary>
-        public abstract IAbility Ability { get; set; }
+        public virtual IAbility Ability
+        {
+            get => _ability;
+            set
+            {
+                if (Class == value.IdClass)
+                    _ability = value;
+            }
+        }
         /// <summary>
         /// Конструктор для задания Жизней и Маны
         /// </summary>

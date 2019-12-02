@@ -5,4 +5,9 @@
     <TargetFramework>netcoreapp3.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Fighters\Abilitys\MidGrade\" />
+    <Folder Include="Fighters\Abilitys\HighGrade\" />
+  </ItemGroup>
+
 </Project>
