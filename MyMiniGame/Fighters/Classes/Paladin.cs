@@ -3,15 +3,15 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace MyMiniGame.Fighters
+namespace MyMiniGame.Fighters.Classes
 {
     /// <summary>
-    /// Класс : Воин
+    /// Класс : Паладин
     /// </summary>
     /// 
-    class Warrior : BaseFighter
+    class Paladin : BaseFighter
     {
-        public override Classes Class { get; set; } = Classes.Warrior;
+        public override Classes Class { get; set; } = Classes.Paladin;
         public override byte Level { get; set; } = 1;
         public override int Strength { get; set; } = 5;
         public override int Defence { get; set; } = 5;
@@ -19,9 +19,9 @@ namespace MyMiniGame.Fighters
         public override int Intellegence { get; set; } = 10;
         public override int Health { get; set; }
         public override int Mana { get; set; }
-        public Warrior(string name) : base(name)
+        public Paladin(string name) : base(name)
         {
-            Ability = new SwordSlash();
+            Ability = new MagicShiled();
         }
     }
 }

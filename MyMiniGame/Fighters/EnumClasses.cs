@@ -4,7 +4,7 @@ using System.Text;
 
 namespace MyMiniGame.Fighters
 {
-    public enum Classes
+    public enum EnumClasses
     {
         Warrior = 1,
         Paladin = 2,

@@ -1,5 +1,6 @@
 ﻿using MyMiniGame.Fighters;
 using MyMiniGame.Fighters.Abilitys;
+using MyMiniGame.Fighters.Classes;
 using MyMiniGame.Fighters.Abilitys.Interfaces;
 using System;
 using System.Text;
@@ -11,6 +12,7 @@ namespace MyMiniGame
     //TODO: Разделить и переделать классы БОЯ, МАГАЗИНА и ПОДНЯТИЯ УРОВНЯ
     //TODO: Переделать отображение информации во время боя
     //TODO: По добавлять информации Summary для классов и интерфесов
+    //TODO: Добавить Класс проверяющего и повышающего Уровень
     class Program
     {
         static void Main(string[] args)

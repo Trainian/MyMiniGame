@@ -6,6 +6,7 @@ using System.Text;
 namespace MyMiniGame.Fighters
 {
     //TODO: Добавить Деньги
+    //TODO: Добавить кол-во полученного опыта
     //TODO: Добавить Положительный и Отрицательые эффекты, возможно по несколько эффектов одновременно
     //TODO: Исправить проверку соответсвия Абилки = Классу, реализовав перебор по разрешённым классам в Абилке
     public abstract class BaseFighter 
@@ -22,7 +23,7 @@ namespace MyMiniGame.Fighters
         /// <summary>
         /// Класс, определяет способности
         /// </summary>
-        public abstract Classes Class { get; set; }
+        public abstract EnumClasses Class { get; set; }
         /// <summary>
         /// Уровень, каждый уровень даёт +3 очка
         /// </summary>
@@ -60,8 +61,11 @@ namespace MyMiniGame.Fighters
             get => _ability;
             set
             {
-                if (Class == value.IdClass)
-                    _ability = value;
+                foreach (var item in value.IdClass)
+                {
+                    if (Class == item)
+                        _ability = value;
+                }
             }
         }
         /// <summary>

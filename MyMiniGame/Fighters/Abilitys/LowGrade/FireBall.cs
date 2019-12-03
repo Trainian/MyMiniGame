@@ -7,10 +7,8 @@ namespace MyMiniGame.Fighters.Abilitys
 {
     class FireBall : IAbility
     {
-        public Classes IdClass => Classes.Mag;
-
+        public List<EnumClasses> IdClass => new List<EnumClasses>(new EnumClasses[] { EnumClasses.Mag });
         public string FullInfo => "Огненный шар, наносящий ожоги и увечья противнику";
-
         public void Use(BaseFighter fighter, BaseFighter enemy)
         {
             //TODO: Реализовать абилку для FireBall

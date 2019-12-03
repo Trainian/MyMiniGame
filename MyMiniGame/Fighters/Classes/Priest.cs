@@ -1,17 +1,17 @@
-﻿using MyMiniGame.Fighters.Abilitys;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using MyMiniGame.Fighters.Abilitys;
+using MyMiniGame.Fighters.Abilitys.Interfaces;
 
-namespace MyMiniGame.Fighters
+namespace MyMiniGame.Fighters.Classes
 {
     /// <summary>
-    /// Класс : Паладин
+    /// Класс : Священник
     /// </summary>
-    /// 
-    class Paladin : BaseFighter
+    class Priest : BaseFighter
     {
-        public override Classes Class { get; set; } = Classes.Paladin;
+        public override Classes Class { get; set; } = Classes.Cleric;
         public override byte Level { get; set; } = 1;
         public override int Strength { get; set; } = 5;
         public override int Defence { get; set; } = 5;
@@ -19,9 +19,9 @@ namespace MyMiniGame.Fighters
         public override int Intellegence { get; set; } = 10;
         public override int Health { get; set; }
         public override int Mana { get; set; }
-        public Paladin(string name) : base(name)
+        public Priest(string name) : base(name) 
         {
-            Ability = new MagicShiled();
+            Ability = new Cure();
         }
     }
 }

@@ -7,8 +7,7 @@ namespace MyMiniGame.Fighters.Abilitys
 {
     class MagicShiled : IAbility
     {
-        public Classes IdClass => Classes.Paladin;
-
+        public List<EnumClasses> IdClass => new List<EnumClasses>(new EnumClasses[] {EnumClasses.Paladin});
         public string FullInfo => "Магический щит, дающий защиту при следующем ударе";
 
         public void Use(BaseFighter fighter, BaseFighter enemy)

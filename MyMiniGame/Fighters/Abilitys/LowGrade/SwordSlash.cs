@@ -7,10 +7,8 @@ namespace MyMiniGame.Fighters.Abilitys
 {
     class SwordSlash : IAbility
     {
-        public Classes IdClass => Classes.Warrior;
-
+        public List<EnumClasses> IdClass => new List<EnumClasses>(new EnumClasses[] {EnumClasses.Warrior});
         public string FullInfo => "Рассекающий удар, способный пробить броню";
-
         public void Use(BaseFighter fighter, BaseFighter enemy)
         {
             //TODO: Реализовать абилку для SwordSlash

@@ -10,7 +10,7 @@ namespace MyMiniGame.Fighters.Abilitys
 {
     public struct Cure : IAbility
     {
-        public Classes IdClass => Classes.Cleric;
+        public List<EnumClasses> IdClass => new List<EnumClasses>(new EnumClasses[] {EnumClasses.Cleric});
         public string FullInfo => "Восстанавливает немного здоровья";
 
         public void Use(BaseFighter fighterOne, BaseFighter fighterTwo)

@@ -8,7 +8,7 @@ namespace MyMiniGame.Fighters.Abilitys
 {
     class BloodBlade : IAbility
     {
-        public Classes IdClass => Classes.Thief;
+        public List<EnumClasses> IdClass => new List<EnumClasses>(new EnumClasses[]{EnumClasses.Thief});
 
         public string FullInfo => "Кровавый меч, который способен нанести урон и вернуть часть жизней владельцу";
 
