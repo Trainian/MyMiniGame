@@ -18,34 +18,19 @@ namespace MyMiniGame
         static void Main(string[] args)
         {
             messager += consoleMessage;
+            bool _endFight = false;
 
-            bool end = false;
+            BaseFighter Fighter = new Priest("Dima") {Color = ConsoleColor.Cyan};
+            BaseFighter Fighter2 = new Thief("Monster") {Color = ConsoleColor.DarkMagenta};
 
-            var Fighter = new Priest("Dima") {Color = ConsoleColor.Cyan};
-            var Fighter2 = new Thief("Monster") {Color = ConsoleColor.DarkMagenta};
-
-            while(!end)
+            while(!_endFight)
             {
-                Fighter.fighterFullInfo();
-                messager?.Invoke(new String('-', 25));
-                Fighter.Attack(Fighter2);
-                Fighter.SuperAbility(Fighter2);
-                FightHelper.fightersNormalInfo(Fighter, Fighter2);
-                if (Console.ReadLine() == "exit")
-                    end = true;
-                else
-                    Console.Clear();
-
-                Fighter2.fighterFullInfo();
-                messager?.Invoke(new String('-', 25));
-                Fighter2.Attack(Fighter);
-                Fighter2.SuperAbility(Fighter);
-                FightHelper.fightersNormalInfo(Fighter2, Fighter);
-                if (Console.ReadLine() == "exit")
-                    end = true;
-                else
-                    Console.Clear();
+                Console.Clear();
+                FightHelper.changeFighters<BaseFighter>(ref Fighter,ref Fighter2);
+                _endFight = Battle.Fight(Fighter, Fighter2);
+                Console.ReadLine();
             }
+            Console.WriteLine("Конец !");
         }
     }
 }

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Text;
 using static MyMiniGame.Program;
 using static MyMiniGame.Messager;
+using MyMiniGame.Fighters.Classes;
 
 namespace MyMiniGame.Fighters.Abilitys
 {

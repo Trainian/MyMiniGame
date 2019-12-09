@@ -1,4 +1,5 @@
 ﻿using MyMiniGame.Fighters.Abilitys.Interfaces;
+using MyMiniGame.Fighters.Classes;
 using System;
 using System.Collections.Generic;
 using System.Text;

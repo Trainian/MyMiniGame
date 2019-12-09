@@ -1,4 +1,5 @@
 ﻿using MyMiniGame.Fighters;
+using MyMiniGame.Fighters.Classes;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -41,6 +42,12 @@ namespace MyMiniGame
             messager($"{fighterOne.Name} нанёс {fighterOne.Strength} урона {fighterTwo.Name}");
             messager($"Оставшееся здоровье противника: {fighterTwo.Health}");
             Console.ForegroundColor = ConsoleColor.White;
+        }
+        internal static void changeFighters<T> (ref T fighterOne, ref T fighterTwo)
+        {
+            var temp = fighterOne;
+            fighterOne = fighterTwo;
+            fighterTwo = temp;
         }
     }
 }

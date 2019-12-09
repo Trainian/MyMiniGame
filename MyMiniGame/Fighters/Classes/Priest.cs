@@ -11,7 +11,7 @@ namespace MyMiniGame.Fighters.Classes
     /// </summary>
     class Priest : BaseFighter
     {
-        public override Classes Class { get; set; } = Classes.Cleric;
+        public override EnumClasses Class { get; set; } = EnumClasses.Cleric;
         public override byte Level { get; set; } = 1;
         public override int Strength { get; set; } = 5;
         public override int Defence { get; set; } = 5;

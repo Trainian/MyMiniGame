@@ -1,17 +1,18 @@
 ﻿using MyMiniGame.Fighters.Abilitys.Interfaces;
+using MyMiniGame.Fighters.Effects.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace MyMiniGame.Fighters
+namespace MyMiniGame.Fighters.Classes
 {
     //TODO: Добавить Деньги
-    //TODO: Добавить кол-во полученного опыта
-    //TODO: Добавить Положительный и Отрицательые эффекты, возможно по несколько эффектов одновременно
     //TODO: Исправить проверку соответсвия Абилки = Классу, реализовав перебор по разрешённым классам в Абилке
-    public abstract class BaseFighter 
+    public abstract class BaseFighter
     {
         private IAbility _ability;
+        private List<IEffect> _effects;
+
         /// <summary>
         /// Имя персонажа, является идентификатором
         /// </summary>
@@ -28,6 +29,10 @@ namespace MyMiniGame.Fighters
         /// Уровень, каждый уровень даёт +3 очка
         /// </summary>
         public abstract byte Level { get; set; }
+        /// <summary>
+        /// Опыт, чем больше опыта, тем выше уровень
+        /// </summary>
+        public uint Exp { get; set; }
         /// <summary>
         /// Сила, увеличивает атаку и немного добовляет жизней
         /// </summary>
@@ -69,6 +74,34 @@ namespace MyMiniGame.Fighters
             }
         }
         /// <summary>
+        /// Наложенные эффекты
+        /// Наложенные эффекты, будь то защита или отравление и т.д.
+        /// </summary>
+        public virtual List<IEffect> Effects
+        {
+            get => _effects;
+            set
+            {
+                // Ищим эффекты, которые совпадают уже с существующими
+                // если существует, то обновляем эффект
+                // после чего удаляем их из новых, которые уже обновили старые
+                foreach (var myEffect in _effects)
+                {
+                    foreach (var newEffect in value)
+                    {
+                        if (myEffect.Name == newEffect.Name)
+                        {
+                            myEffect.Ticks = newEffect.Ticks;
+                            value.Remove(newEffect);
+                        }
+                    }
+                }
+                // Перебираем эффекты, которые не существовали
+                // и добавляем в список эффектов
+                value.ForEach(x => _effects.Add(x));
+            }
+        }
+        /// <summary>
         /// Конструктор для задания Жизней и Маны
         /// </summary>
         /// <param name="name">Имя персонажа</param>
@@ -78,5 +111,6 @@ namespace MyMiniGame.Fighters
             Health = Strength * 10;
             Mana = Intellegence * 10;
         }
+
     }
 }

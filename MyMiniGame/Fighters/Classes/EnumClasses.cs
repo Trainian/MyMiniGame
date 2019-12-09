@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace MyMiniGame.Fighters
+namespace MyMiniGame.Fighters.Classes
 {
     public enum EnumClasses
     {

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MyMiniGame.Fighters.Classes;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -6,8 +7,8 @@ namespace MyMiniGame.Fighters.Abilitys.Interfaces
 {
     public interface IAbility
     {
-        public List<EnumClasses> IdClass { get; }
-        public string FullInfo { get; }
+        List<EnumClasses> IdClass { get; }
+        string FullInfo { get; }
         void Use(BaseFighter fighter, BaseFighter enemy);
     }
 }

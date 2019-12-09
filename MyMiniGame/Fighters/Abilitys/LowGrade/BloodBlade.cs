@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using MyMiniGame.Fighters.Abilitys.Interfaces;
+using MyMiniGame.Fighters.Classes;
 using static MyMiniGame.Messager;
 
 namespace MyMiniGame.Fighters.Abilitys
