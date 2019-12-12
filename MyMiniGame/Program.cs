@@ -26,6 +26,8 @@ namespace MyMiniGame
             while(!_endFight)
             {
                 Console.Clear();
+                Fighter.fighterFullInfo();
+                messager?.Invoke(new String('-', 25));
                 FightHelper.changeFighters<BaseFighter>(ref Fighter,ref Fighter2);
                 _endFight = Battle.Fight(Fighter, Fighter2);
                 Console.ReadLine();

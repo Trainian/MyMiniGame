@@ -10,6 +10,9 @@ namespace MyMiniGame.Fighters.Abilitys
     {
         public List<EnumClasses> IdClass => new List<EnumClasses>(new EnumClasses[] {EnumClasses.Warrior});
         public string FullInfo => "Рассекающий удар, способный пробить броню";
+
+        public int Cost => 8;
+
         public void Use(BaseFighter fighter, BaseFighter enemy)
         {
             //TODO: Реализовать абилку для SwordSlash

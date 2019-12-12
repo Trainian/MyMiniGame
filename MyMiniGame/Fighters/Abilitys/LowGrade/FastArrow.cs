@@ -10,6 +10,9 @@ namespace MyMiniGame.Fighters.Abilitys
     {
         public List<EnumClasses> IdClass => new List<EnumClasses>(new EnumClasses[] {EnumClasses.Archer });
         public string FullInfo => "Быстрая и сильная стрела, наносящий большой урон";
+
+        public int Cost => 8;
+
         public void Use(BaseFighter fighter, BaseFighter enemy)
         {
             //TODO: Реализовать АБилку для FastArrow

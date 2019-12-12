@@ -11,6 +11,8 @@ namespace MyMiniGame.Fighters.Abilitys
         public List<EnumClasses> IdClass => new List<EnumClasses>(new EnumClasses[] {EnumClasses.Paladin});
         public string FullInfo => "Магический щит, дающий защиту при следующем ударе";
 
+        public int Cost => 20;
+
         public void Use(BaseFighter fighter, BaseFighter enemy)
         {
             //TODO: Реализовать Абилку для MagicShiled

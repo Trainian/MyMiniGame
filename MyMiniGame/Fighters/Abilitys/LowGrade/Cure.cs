@@ -14,9 +14,11 @@ namespace MyMiniGame.Fighters.Abilitys
         public List<EnumClasses> IdClass => new List<EnumClasses>(new EnumClasses[] {EnumClasses.Cleric});
         public string FullInfo => "Восстанавливает немного здоровья";
 
+        public int Cost => 10;
+
         public void Use(BaseFighter fighterOne, BaseFighter fighterTwo)
         {
-            int hlth = fighterOne.Intellegence * 1;
+            int hlth = (int)(fighterOne.Intellegence * 0.25);
             messager?.Invoke($"---> {fighterOne.Name} лечится на {hlth}! <---");
             fighterOne.Health += hlth;
         }

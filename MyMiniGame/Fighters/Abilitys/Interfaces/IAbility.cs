@@ -9,6 +9,7 @@ namespace MyMiniGame.Fighters.Abilitys.Interfaces
     {
         List<EnumClasses> IdClass { get; }
         string FullInfo { get; }
+        int Cost { get; }
         void Use(BaseFighter fighter, BaseFighter enemy);
     }
 }

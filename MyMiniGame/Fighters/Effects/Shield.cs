@@ -1,4 +1,5 @@
-﻿using MyMiniGame.Fighters.Effects.Interfaces;
+﻿using MyMiniGame.Fighters.Classes;
+using MyMiniGame.Fighters.Effects.Interfaces;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -11,6 +12,7 @@ namespace MyMiniGame.Fighters.Effects
         public string Name => "Магический Щит";
         public string FullName => "Магический щит, которой даёт небольшую защиту";
         public sbyte Ticks { get; set; } = -1;
+        public bool IsPositive => true;
         public void Run(BaseFighter fighter)
         {
             throw new NotImplementedException();

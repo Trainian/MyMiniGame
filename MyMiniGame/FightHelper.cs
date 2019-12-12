@@ -29,20 +29,6 @@ namespace MyMiniGame
             messager?.Invoke($"Fighter {fighterOne.Name} Health: {fighterOne.Health}");
             messager?.Invoke($"Fighter {fighterTwo.Name} Health: {fighterTwo.Health}");
         }
-        internal static void SuperAbility (this BaseFighter fighterOne, BaseFighter fighterTwo)
-        {
-            Console.ForegroundColor = fighterOne.Color;
-            fighterOne.Ability.Use(fighterOne, fighterTwo);
-            Console.ForegroundColor = ConsoleColor.White;
-        }
-        internal static void Attack (this BaseFighter fighterOne, BaseFighter fighterTwo)
-        {
-            Console.ForegroundColor = fighterOne.Color;
-            fighterTwo.Health -= fighterOne.Strength;
-            messager($"{fighterOne.Name} нанёс {fighterOne.Strength} урона {fighterTwo.Name}");
-            messager($"Оставшееся здоровье противника: {fighterTwo.Health}");
-            Console.ForegroundColor = ConsoleColor.White;
-        }
         internal static void changeFighters<T> (ref T fighterOne, ref T fighterTwo)
         {
             var temp = fighterOne;

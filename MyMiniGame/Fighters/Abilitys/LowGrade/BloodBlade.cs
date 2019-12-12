@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using MyMiniGame.Fighters.Abilitys.Interfaces;
 using MyMiniGame.Fighters.Classes;
+using MyMiniGame.Fighters.Effects;
 using static MyMiniGame.Messager;
 
 namespace MyMiniGame.Fighters.Abilitys
@@ -11,16 +12,16 @@ namespace MyMiniGame.Fighters.Abilitys
     {
         public List<EnumClasses> IdClass => new List<EnumClasses>(new EnumClasses[]{EnumClasses.Thief});
 
-        public string FullInfo => "Кровавый меч, который способен нанести урон и вернуть часть жизней владельцу";
+        public string FullInfo => "Кровавый меч, наносит урон и накладывать эффект кровотечения";
+
+        public int Cost => 15;
 
         public void Use(BaseFighter fighter, BaseFighter enemy)
         {
             int dmg = enemy.Defence - (fighter.Strength / 2);
-            int hlth = (enemy.Defence - (fighter.Strength / 2)) / 3;
-            messager?.Invoke($"{fighter.Name} Использует BloodBLade и наносит: {dmg}");
-            messager?.Invoke($"{fighter.Name} восстанавливает жизни на {hlth}");
+            enemy.Effects.Add(new Bleeding());
             enemy.Health -= dmg;
-            fighter.Health += hlth;
+            messager?.Invoke($"{fighter.Name} Использует BloodBLade и наносит: {dmg}");
         }
     }
 }
