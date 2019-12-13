@@ -20,9 +20,9 @@ namespace MyMiniGame
             messager($"Оставшееся здоровье противника: {fighterTwo.Health}");
             Console.ForegroundColor = ConsoleColor.White;
 
-            return Death(fighterTwo);
+            return fighterTwo.IsDeath();
         }
-        private static bool Death (BaseFighter fighter)
+        private static bool IsDeath (this BaseFighter fighter)
         {
             if (fighter.Health <= 0)
                 return true;
@@ -46,6 +46,11 @@ namespace MyMiniGame
         private static int Attack(this BaseFighter fighterOne, BaseFighter fighterTwo)
         {
             return fighterOne.Strength;
+        }
+        private static void Effects(this BaseFighter fighter)
+        {
+            var posEffects = fighter.Effects.FindAll(x => x.IsPositive == true);
+            var negEffects = fighter.Effects.FindAll(x => x.IsPositive == false);
         }
     }
 }
