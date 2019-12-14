@@ -11,7 +11,7 @@ namespace MyMiniGame.Fighters.Abilitys
 {
     public struct Cure : IAbility
     {
-        public List<EnumClasses> IdClass => new List<EnumClasses>(new EnumClasses[] {EnumClasses.Cleric});
+        public List<EnumClasses> IdClass => new List<EnumClasses>(new EnumClasses[] {EnumClasses.Priest});
         public string FullInfo => "Восстанавливает немного здоровья";
 
         public int Cost => 10;

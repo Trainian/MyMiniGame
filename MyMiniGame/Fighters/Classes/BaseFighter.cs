@@ -6,8 +6,6 @@ using System.Text;
 
 namespace MyMiniGame.Fighters.Classes
 {
-    //TODO: Добавить Деньги
-    //TODO: Исправить проверку соответсвия Абилки = Классу, реализовав перебор по разрешённым классам в Абилке
     public abstract class BaseFighter
     {
         private IAbility _ability;
@@ -28,7 +26,7 @@ namespace MyMiniGame.Fighters.Classes
         /// <summary>
         /// Уровень, каждый уровень даёт +3 очка
         /// </summary>
-        public abstract byte Level { get; set; }
+        public byte Level { get; set; }
         /// <summary>
         /// Опыт, чем больше опыта, тем выше уровень
         /// </summary>
@@ -52,11 +50,16 @@ namespace MyMiniGame.Fighters.Classes
         /// <summary>
         /// Здоровье = Сила * 10
         /// </summary>
-        public abstract int Health { get; set; }
+        public int Health { get; set; }
         /// <summary>
         /// Мана = Интеллект * 10
         /// </summary>
-        public abstract int Mana { get; set; }
+        public int Mana { get; set; }
+        /// <summary>
+        /// Деньги
+        /// </summary>
+        /// <value></value>//
+        public uint Money { get; set; }
         /// <summary>
         /// Спецспособность
         /// Каждый класс может иметь только свои Способности
@@ -110,6 +113,7 @@ namespace MyMiniGame.Fighters.Classes
             Health = Strength * 10;
             Mana = Intellegence * 10;
             _effects = new List<IEffect>();
+            Level = 1;
         }
 
     }

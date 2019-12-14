@@ -9,7 +9,7 @@ namespace MyMiniGame.Fighters.Classes
         Warrior = 1,
         Paladin = 2,
         Mag = 3,
-        Cleric = 4,
+        Priest = 4,
         Archer = 5,
         Thief = 6
     }
