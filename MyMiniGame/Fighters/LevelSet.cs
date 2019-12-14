@@ -4,6 +4,7 @@ using System.Text;
 
 namespace MyMiniGame.Fighters
 {
+    //TODO: Реализовать возможность роста уровня
     public class LevelSet
     {
     }
