@@ -11,11 +11,12 @@ namespace MyMiniGame.Fighters.Effects
     {
         public string Name => "Магический Щит";
         public string FullName => "Магический щит, которой даёт небольшую защиту";
-        public sbyte Ticks { get; set; } = -1;
+        public sbyte Ticks { get; set; } = 5;
         public bool IsPositive => true;
-        public void Run(BaseFighter fighter)
+        public int Run(BaseFighter fighter)
         {
-            throw new NotImplementedException();
+            Ticks--;
+            return 3;
         }
     }
 }

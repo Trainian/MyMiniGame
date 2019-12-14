@@ -14,11 +14,12 @@ namespace MyMiniGame.Fighters.Effects
 
         public bool IsPositive => false;
 
-        public sbyte Ticks { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public sbyte Ticks { get; set; } = 3;
 
-        public void Run(BaseFighter fighter)
+        public int Run(BaseFighter fighter)
         {
-            throw new NotImplementedException();
+            Ticks--;
+            return -1;
         }
     }
 }

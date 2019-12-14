@@ -7,7 +7,7 @@ using static MyMiniGame.Messager;
 
 namespace MyMiniGame
 {
-    internal static class FightHelper
+    internal static class FighterInfoHelper
     {
         internal static void fighterFullInfo(this BaseFighter fighter)
         {

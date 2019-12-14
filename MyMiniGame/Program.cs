@@ -5,6 +5,7 @@ using MyMiniGame.Fighters.Abilitys.Interfaces;
 using System;
 using System.Text;
 using static MyMiniGame.Messager;
+using MyMiniGame.Fighters.Effects;
 
 namespace MyMiniGame
 {
@@ -22,14 +23,16 @@ namespace MyMiniGame
 
             BaseFighter Fighter = new Priest("Dima") {Color = ConsoleColor.Cyan};
             BaseFighter Fighter2 = new Thief("Monster") {Color = ConsoleColor.DarkMagenta};
+            Fighter2.Effects.Add(new Bleeding());
+            Fighter2.Effects.Add(new Shield());
 
             while(!_endFight)
             {
                 Console.Clear();
                 Fighter.fighterFullInfo();
                 messager?.Invoke(new String('-', 25));
-                FightHelper.changeFighters<BaseFighter>(ref Fighter,ref Fighter2);
                 _endFight = Battle.Fight(Fighter, Fighter2);
+                FighterInfoHelper.changeFighters<BaseFighter>(ref Fighter,ref Fighter2);
                 Console.ReadLine();
             }
             Console.WriteLine("Конец !");

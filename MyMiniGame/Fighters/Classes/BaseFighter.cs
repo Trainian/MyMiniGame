@@ -74,8 +74,7 @@ namespace MyMiniGame.Fighters.Classes
             }
         }
         /// <summary>
-        /// Наложенные эффекты
-        /// Наложенные эффекты, будь то защита или отравление и т.д.
+        /// Наложенные эффекты, будь то защита, отравление и т.д.
         /// </summary>
         public virtual List<IEffect> Effects
         {
@@ -110,6 +109,7 @@ namespace MyMiniGame.Fighters.Classes
             Name = name;
             Health = Strength * 10;
             Mana = Intellegence * 10;
+            _effects = new List<IEffect>();
         }
 
     }
