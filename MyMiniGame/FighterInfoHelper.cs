@@ -12,7 +12,8 @@ namespace MyMiniGame
         internal static void fighterFullInfo(this BaseFighter fighter)
         {
             Console.ForegroundColor = ConsoleColor.Yellow;
-            messager?.Invoke($"Name:{fighter.Name}, Class:{fighter.Class}, Health:{fighter.Health}, Mana:{fighter.Mana}");
+            messager?.Invoke($"Name:{fighter.Name}, Class:{fighter.Class}, Level:{fighter.Level}, Exp:{fighter.Exp}");
+            messager?.Invoke($"Health:{fighter.Health}, Mana:{fighter.Mana}");
             messager?.Invoke($"Strength:{fighter.Strength}, Defence:{fighter.Defence}, Agility:{fighter.Agility}, Intellegence:{fighter.Intellegence}");
             messager?.Invoke($"Abilitye:{fighter.Ability}, Info:{fighter.Ability.FullInfo}");
             Console.ForegroundColor = ConsoleColor.White;

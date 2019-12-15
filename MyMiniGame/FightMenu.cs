@@ -9,7 +9,11 @@ namespace MyMiniGame
     public class FightMenu
     {
         private List<BaseFighter> _fighters { get; set; }
-        public void ChooseAttack ()
+        public void StartAtack()
+        {
+
+        }
+        private void ChooseAttack ()
         {
 
         }

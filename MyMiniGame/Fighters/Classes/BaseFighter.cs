@@ -26,11 +26,11 @@ namespace MyMiniGame.Fighters.Classes
         /// <summary>
         /// Уровень, каждый уровень даёт +3 очка
         /// </summary>
-        public byte Level { get; set; }
+        public byte Level { get; set; } = 1;
         /// <summary>
         /// Опыт, чем больше опыта, тем выше уровень
         /// </summary>
-        public uint Exp { get; set; }
+        public uint Exp { get; set; } = 0;
         /// <summary>
         /// Сила, увеличивает атаку и немного добовляет жизней
         /// </summary>

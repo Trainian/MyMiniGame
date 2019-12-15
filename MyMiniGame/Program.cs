@@ -5,6 +5,7 @@ using MyMiniGame.Fighters.Abilitys.Interfaces;
 using System;
 using System.Text;
 using static MyMiniGame.Messager;
+using static MyMiniGame.Fighters.LevelChange;
 using MyMiniGame.Fighters.Effects;
 
 namespace MyMiniGame
@@ -33,8 +34,10 @@ namespace MyMiniGame
                 messager?.Invoke(new String('-', 25));
                 _endFight = Battle.Fight(Fighter, Fighter2);
                 FighterInfoHelper.changeFighters<BaseFighter>(ref Fighter,ref Fighter2);
-                Console.ReadLine();
+                //Console.ReadLine();
             }
+            ExpSet(Fighter2, Fighter.Level, true);
+            Fighter2.fighterFullInfo();
             Console.WriteLine("Конец !");
         }
     }

@@ -1,4 +1,5 @@
 ﻿using MyMiniGame.Fighters.Classes;
+using MyMiniGame.Fighters.Effects.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -87,33 +88,29 @@ namespace MyMiniGame
         {
             int dmg = 0;
             var posEffects = FighterTwo.Effects.FindAll(x => x.IsPositive == true);
-            foreach (var effect in posEffects)
-            {
-                dmg += effect.Run(FighterTwo);
-                if (effect.Ticks <= 0)
-                    FighterTwo.Effects.Remove(effect);
-            }
+            dmg += RunEffects(posEffects, FighterTwo);
 
             var negEffects = FighterTwo.Effects.FindAll(x => x.IsPositive == false);
-            foreach (var effect in negEffects)
+            dmg += RunEffects(negEffects, FighterTwo);
+
+            return dmg;
+        }
+        /// <summary>
+        /// Выполняет эффекты и удаляет уже завершившиеся
+        /// </summary>
+        /// <param name="effects">Лист эффектов для выполнения, Негативные или Положительные</param>
+        /// <param name="fighter">Боей, чьи эффекты будут запускаться</param>
+        /// <returns>Возвращает урон от эффектов в int</returns>
+        private static int RunEffects (List<IEffect> effects, BaseFighter fighter)
+        {
+            int dmg = 0;
+            foreach (var effect in effects)
             {
-                dmg += effect.Run(FighterTwo);
+                dmg += effect.Run(fighter);
                 if (effect.Ticks <= 0)
-                    FighterTwo.Effects.Remove(effect);
+                    fighter.Effects.Remove(effect);
             }
             return dmg;
         }
     }
 }
-//-> Выбор Действия
-//1) Обычная атака / Магическая атака
-
-//    а) Получаем обычныую атаку и добавляем эффекты
-
-//        i) Подсчитываем ману, если это магия
-
-//        ii) Если нет маны, то пропускам, если есть то добавляем эффекты
-
-//    б) Плюсуем атаку с эффектами
-
-//    в) Выводим атаку
