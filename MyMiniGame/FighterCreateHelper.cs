@@ -14,7 +14,7 @@ namespace MyMiniGame
             int ch;
             string str;
 
-            Console.WriteLine("Назовите своего Героя: ");
+            Console.Write("Назовите своего Героя: ");
             name = Console.ReadLine().Trim();
 
             do
@@ -22,7 +22,7 @@ namespace MyMiniGame
                 Console.WriteLine("Выберите Класс");
                 Console.WriteLine("Warrior = 1, Paladin = 2, Mag = 3, Priest = 4, Archer = 5, Thief = 6");
                 str = Console.ReadLine();
-            } while(Int32.TryParse(str, out ch) && ch < 7 && ch > 0);
+            } while(!Int32.TryParse(str, out ch) || ch > 6 || ch < 1);
             fighter = ch switch
             {
                 1 =>  new Warrior(name),

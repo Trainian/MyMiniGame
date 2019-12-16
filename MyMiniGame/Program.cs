@@ -20,25 +20,27 @@ namespace MyMiniGame
         static void Main(string[] args)
         {
             messager += consoleMessage;
-            bool _endFight = false;
+            var menu = new MainMenu();
+            menu.StartMenu();
+            //bool _endFight = false;
 
-            BaseFighter Fighter = new Priest("Dima") {Color = ConsoleColor.Cyan};
-            BaseFighter Fighter2 = new Thief("Monster") {Color = ConsoleColor.DarkMagenta};
-            Fighter2.Effects.Add(new Bleeding());
-            Fighter2.Effects.Add(new Shield());
+            //BaseFighter Fighter = new Priest("Dima") {Color = ConsoleColor.Cyan};
+            //BaseFighter Fighter2 = new Thief("Monster") {Color = ConsoleColor.DarkMagenta};
+            //Fighter2.Effects.Add(new Bleeding());
+            //Fighter2.Effects.Add(new Shield());
 
-            while(!_endFight)
-            {
-                Console.Clear();
-                Fighter.fighterFullInfo();
-                messager?.Invoke(new String('-', 25));
-                _endFight = Battle.Fight(Fighter, Fighter2);
-                FighterInfoHelper.changeFighters<BaseFighter>(ref Fighter,ref Fighter2);
-                //Console.ReadLine();
-            }
-            ExpSet(Fighter2, Fighter.Level, true);
-            Fighter2.fighterFullInfo();
-            Console.WriteLine("Конец !");
+            //while(!_endFight)
+            //{
+            //    Console.Clear();
+            //    Fighter.fighterFullInfo();
+            //    messager?.Invoke(new String('-', 25));
+            //    _endFight = Battle.Fight(Fighter, Fighter2);
+            //    FighterInfoHelper.changeFighters<BaseFighter>(ref Fighter,ref Fighter2);
+            //    //Console.ReadLine();
+            //}
+            //ExpSet(Fighter2, Fighter.Level, true);
+            //Fighter2.fighterFullInfo();
+            //Console.WriteLine("Конец !");
         }
     }
 }
