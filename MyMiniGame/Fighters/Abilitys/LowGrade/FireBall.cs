@@ -13,6 +13,8 @@ namespace MyMiniGame.Fighters.Abilitys
 
         public int Cost => 20;
 
+        public string Name => "Малый огенный шар";
+
         public void Use(BaseFighter fighter, BaseFighter enemy)
         {
             //TODO: Реализовать абилку для FireBall

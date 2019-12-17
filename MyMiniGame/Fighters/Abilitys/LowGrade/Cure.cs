@@ -16,6 +16,8 @@ namespace MyMiniGame.Fighters.Abilitys
 
         public int Cost => 10;
 
+        public string Name => "Лёгкое Лечение";
+
         public void Use(BaseFighter fighterOne, BaseFighter fighterTwo)
         {
             int hlth = (int)(fighterOne.Intellegence * 0.25);

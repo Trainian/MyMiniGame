@@ -13,6 +13,8 @@ namespace MyMiniGame.Fighters.Abilitys
 
         public int Cost => 20;
 
+        public string Name => "Лёгкий магический щит";
+
         public void Use(BaseFighter fighter, BaseFighter enemy)
         {
             //TODO: Реализовать Абилку для MagicShiled

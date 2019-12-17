@@ -13,6 +13,8 @@ namespace MyMiniGame.Fighters.Abilitys
 
         public int Cost => 8;
 
+        public string Name => "Слабые но быстрые стрелы";
+
         public void Use(BaseFighter fighter, BaseFighter enemy)
         {
             //TODO: Реализовать АБилку для FastArrow

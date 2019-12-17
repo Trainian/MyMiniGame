@@ -13,6 +13,8 @@ namespace MyMiniGame.Fighters.Abilitys
 
         public int Cost => 8;
 
+        public string Name => "Лёгкий рубящий удар мечом";
+
         public void Use(BaseFighter fighter, BaseFighter enemy)
         {
             //TODO: Реализовать абилку для SwordSlash

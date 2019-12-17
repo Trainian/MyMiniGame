@@ -21,7 +21,7 @@ namespace MyMiniGame
         internal static void fighterSmallInfo(this BaseFighter fighterOne)
         {
             Console.ForegroundColor = fighterOne.Color; 
-            messager?.Invoke($"Fighter {fighterOne.Name} Health: {fighterOne.Health}");
+            messager?.Invoke($"Fighter {fighterOne.Name}, Health: {fighterOne.Health}, Mana: {fighterOne.Mana}");
             Console.ForegroundColor = ConsoleColor.White;
         }
         internal static void fightersNormalInfo(BaseFighter fighterOne, BaseFighter fighterTwo)

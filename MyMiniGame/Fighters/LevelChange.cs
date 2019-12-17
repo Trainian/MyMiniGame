@@ -45,6 +45,7 @@ namespace MyMiniGame.Fighters
                 {
                     fighter.Level++;
                     fighter.Exp -= nextLevelExp;
+                    fighter.LvlUp += 3;
                 }
             }
         }

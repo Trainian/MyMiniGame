@@ -32,6 +32,10 @@ namespace MyMiniGame.Fighters.Classes
         /// </summary>
         public uint Exp { get; set; } = 0;
         /// <summary>
+        /// Кол-во очков для повышения характеристик
+        /// </summary>
+        public uint LvlUp { get; set; } = 0;
+        /// <summary>
         /// Сила, увеличивает атаку и немного добовляет жизней
         /// </summary>
         public abstract int Strength { get; set; }
