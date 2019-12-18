@@ -20,7 +20,7 @@ namespace MyMiniGame
             do
             {
                 Console.WriteLine("Выберите Класс");
-                Console.WriteLine("Warrior = 1, Paladin = 2, Mag = 3, Priest = 4, Archer = 5, Thief = 6");
+                Console.WriteLine("1 = Warrior\n2 = Paladin\n3 = Mag\n4 = Priest\n5 = Archer\n6 = Thief");
                 str = Console.ReadLine();
             } while(!Int32.TryParse(str, out ch) || ch > 6 || ch < 1);
             fighter = ch switch
