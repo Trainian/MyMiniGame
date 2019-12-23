@@ -10,43 +10,14 @@ namespace MyMiniGame
     static class Battle
     {
         /// <summary>
-        /// Начинает бой
+        /// Обычная такая
         /// </summary>
         /// <param name="fighterOne">Атакующий</param>
         /// <param name="fighterTwo">Защищающийся</param>
-        /// <returns>Возвращает значение TRUE - если бой закончился и FALSE - если бой продолжается</returns>
-        public static bool Fight (BaseFighter fighterOne, BaseFighter fighterTwo, int chooseAttack)
+        /// <returns>Возвращает атаку = Силе</returns>
+        public static int BaseAttack(this BaseFighter fighterOne, BaseFighter fighterTwo)
         {
-            int attack = 0;
-            attack += fighterOne.Attack(fighterTwo);
-            attack += fighterOne.Effects(fighterTwo);
-            fighterOne.SuperAbility(fighterTwo);
-
-            if (attack > 0)
-                fighterTwo.Health -= attack;
-            else
-                attack = 0;
-
-            FighterInfoHelper.fightersNormalInfo(fighterOne, fighterTwo);
-
-            Console.ForegroundColor = fighterOne.Color;
-            messager($"{fighterOne.Name} нанёс {attack} урона {fighterTwo.Name}");
-            messager($"Оставшееся здоровье противника: {fighterTwo.Health}");
-            Console.ForegroundColor = ConsoleColor.White;
-
-            return fighterTwo.IsDeath();
-        }
-        /// <summary>
-        /// Проверяет на смерть
-        /// </summary>
-        /// <param name="fighter">Боец</param>
-        /// <returns>Возвращает TRUE - если мертв и FALSE - если жив</returns>
-        public static bool IsDeath (this BaseFighter fighter)
-        {
-            if (fighter.Health <= 0)
-                return true;
-            else
-                return false;
+            return fighterOne.Strength;
         }
         /// <summary>
         /// Использование супер-способностей
@@ -67,16 +38,6 @@ namespace MyMiniGame
                 Console.ForegroundColor = ConsoleColor.White;
             }
             return attack;
-        }
-        /// <summary>
-        /// Обычная такая
-        /// </summary>
-        /// <param name="fighterOne">Атакующий</param>
-        /// <param name="fighterTwo">Защищающийся</param>
-        /// <returns>Возвращает атаку = Силе</returns>
-        public static int Attack(this BaseFighter fighterOne, BaseFighter fighterTwo)
-        {
-            return fighterOne.Strength;
         }
         /// <summary>
         /// Подсчет атаки или защиты Положительных и Отриацательных эффектов.
@@ -111,6 +72,18 @@ namespace MyMiniGame
                     fighter.Effects.Remove(effect);
             }
             return dmg;
+        }
+        /// <summary>
+        /// Проверяет на смерть
+        /// </summary>
+        /// <param name="fighter">Боец</param>
+        /// <returns>Возвращает TRUE - если мертв и FALSE - если жив</returns>
+        public static bool IsDeath(this BaseFighter fighter)
+        {
+            if (fighter.Health <= 0)
+                return true;
+            else
+                return false;
         }
     }
 }

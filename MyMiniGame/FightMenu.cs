@@ -10,7 +10,6 @@ namespace MyMiniGame
     {
         private BaseFighter _fighter;
         private BaseFighter _enemie;
-        private List<BaseFighter> _enemies { get; set; } = new List<BaseFighter>();
         public FightMenu(BaseFighter fighter)
 
         {
@@ -23,13 +22,16 @@ namespace MyMiniGame
             {
                 int attack = ChooseAttack();
                 _enemie.Health -= attack;
+
                 FighterInfoHelper.fightersNormalInfo(_fighter, _enemie);
                 Console.ForegroundColor = _fighter.Color;
                 messager($"{_fighter.Name} нанёс {attack} урона {_fighter.Name}");
                 messager($"Оставшееся здоровье противника: {_fighter.Health}");
+
                 Console.ForegroundColor = ConsoleColor.White;
                 Console.WriteLine("Нажмите любую клавишу для продолжения...");
                 Console.ReadKey();
+
             } while (_fighter.Health > 0 && _enemie.Health > 0);
         }
         private int ChooseAttack ()
@@ -41,18 +43,18 @@ namespace MyMiniGame
                 Console.Clear();
                 FighterInfoHelper.fighterSmallInfo(_fighter);
                 messager?.Invoke("Выбор атаки:");
-                messager?.Invoke($"1 - Обычная атака\n2 - Использовать способность ({_fighter.Ability.Cost} маны)\n3 - Сдаться и проиграть");
+                messager?.Invoke($"1 - Обычная атака\n2 - Использовать способность ({_fighter.Ability.Cost} маны)\n3 - Сдаться");
                 strCh = Console.ReadLine();
                 if (int.TryParse(strCh, out ch))
                 {
                     switch (ch)
                     {
                         case 1:
-                            return _fighter.Attack(_enemie);
+                            return _fighter.BaseAttack(_enemie);
                         case 2:
                             return _fighter.SuperAbility(_enemie);
                         case 3:
-                            return int.MinValue;
+                            return int.MaxValue;
                         default:
                             break;
                     }

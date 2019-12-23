@@ -16,10 +16,13 @@ namespace MyMiniGame.Fighters.Effects
 
         public sbyte Ticks { get; set; } = 3;
 
-        public int Run(BaseFighter fighter)
+        public bool IsActive => true;
+
+        public int Run(int dmg)
         {
+            dmg = 1;
             Ticks--;
-            return -1;
+            return dmg;
         }
     }
 }

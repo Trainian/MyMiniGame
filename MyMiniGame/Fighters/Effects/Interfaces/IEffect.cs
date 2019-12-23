@@ -22,6 +22,12 @@ namespace MyMiniGame.Fighters.Effects.Interfaces
         /// </summary>
         public bool IsPositive { get; }
         /// <summary>
+        /// Эффект является активным или пассивынм
+        /// True = Активный
+        /// False = Пассивный
+        /// </summary>
+        public bool IsActive { get;  }
+        /// <summary>
         /// Тики, сколько длится действие, в ходах
         /// -1 - Постоянно, 0+ - Длится опередлённое кол-во ходов
         /// </summary>
@@ -29,6 +35,6 @@ namespace MyMiniGame.Fighters.Effects.Interfaces
         /// <summary>
         /// Действие эффекта
         /// </summary>
-        int Run(BaseFighter fighter);
+        int Run(int dmg);
     }
 }

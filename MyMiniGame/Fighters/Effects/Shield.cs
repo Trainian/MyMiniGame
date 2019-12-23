@@ -10,13 +10,16 @@ namespace MyMiniGame.Fighters.Effects
     class Shield : IEffect
     {
         public string Name => "Магический Щит";
-        public string FullName => "Магический щит, которой даёт небольшую защиту";
+        public string FullName => "Магический щит, которой даёт небольшую защиту 10% от атаки";
         public sbyte Ticks { get; set; } = 5;
         public bool IsPositive => true;
-        public int Run(BaseFighter fighter)
+        public bool IsActive => false;
+
+        public int Run(int dmg)
         {
+            dmg = (dmg / 100) * 90;
             Ticks--;
-            return 3;
+            return dmg;
         }
     }
 }
