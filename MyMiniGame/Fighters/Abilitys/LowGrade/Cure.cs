@@ -18,11 +18,14 @@ namespace MyMiniGame.Fighters.Abilitys
 
         public string Name => "Лёгкое Лечение";
 
-        public void Use(BaseFighter fighterOne, BaseFighter fighterTwo)
+        public bool IsAttack => false;
+
+        public int Use(BaseFighter fighterOne, BaseFighter fighterTwo)
         {
             int hlth = (int)(fighterOne.Intellegence * 0.25);
             messager?.Invoke($"---> {fighterOne.Name} лечится на {hlth}! <---");
             fighterOne.Health += hlth;
+            return -1;
         }
     }
 }

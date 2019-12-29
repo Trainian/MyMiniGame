@@ -24,10 +24,16 @@ namespace MyMiniGame.Fighters.Abilitys.Interfaces
         /// </summary>
         int Cost { get; }
         /// <summary>
+        /// Атакующий эффект или нет
+        /// True = Атака
+        /// False = Не атака
+        /// </summary>
+        bool IsAttack { get; }
+        /// <summary>
         /// Использовать Способность
         /// </summary>
         /// <param name="fighter">Атакующий</param>
         /// <param name="enemy">Защищающийся</param>
-        void Use(BaseFighter fighter, BaseFighter enemy);
+        int Use(BaseFighter fighter, BaseFighter enemy);
     }
 }

@@ -15,7 +15,9 @@ namespace MyMiniGame.Fighters.Abilitys
 
         public string Name => "Лёгкий магический щит";
 
-        public void Use(BaseFighter fighter, BaseFighter enemy)
+        public bool IsAttack => false;
+
+        public int Use(BaseFighter fighter, BaseFighter enemy)
         {
             //TODO: Реализовать Абилку для MagicShiled
             throw new NotImplementedException();

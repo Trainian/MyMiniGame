@@ -14,10 +14,18 @@ namespace MyMiniGame
         /// </summary>
         /// <param name="fighterOne">Атакующий</param>
         /// <param name="fighterTwo">Защищающийся</param>
-        /// <returns>Возвращает атаку = Силе</returns>
+        /// <returns>Возвращает атаку = Силе + Эффекты</returns>
         public static int BaseAttack(this BaseFighter fighterOne, BaseFighter fighterTwo)
         {
-            return fighterOne.Strength;
+            int dmg = 0;
+            dmg += fighterOne.Strength;
+            //Находим все Атакующие\Пассивные эффекты
+            var effects = fighterOne.Effects.FindAll(x => x.IsActiveOrPassive == true && x.IsActiveOrPassive == false);
+            foreach (var effect in effects)
+            {
+                effect.Run(dmg);
+            }
+            return dmg;
         }
         /// <summary>
         /// Использование супер-способностей
@@ -27,17 +35,21 @@ namespace MyMiniGame
         /// <returns>Накладывает положительные или отрицательные эффекты</returns>
         public static int SuperAbility(this BaseFighter fighterOne, BaseFighter fighterTwo)
         {
-            int attack = 0;
-            if(fighterOne.Mana >= fighterOne.Ability.Cost)
+            // Если Абилка не атакующая то используем и возвращаем -1, для обозначения что была не атакующая абилка
+            if (fighterOne.Ability.IsAttack == false)
             {
-                Console.ForegroundColor = fighterOne.Color;
-
-                fighterOne.Mana =- fighterOne.Ability.Cost;
                 fighterOne.Ability.Use(fighterOne, fighterTwo);
-
-                Console.ForegroundColor = ConsoleColor.White;
+                return -1;
             }
-            return attack;
+            else
+            {
+                int dmg = 0;
+
+                fighterOne.Mana -= fighterOne.Ability.Cost;
+                dmg += fighterOne.Ability.Use(fighterOne, fighterTwo);
+
+                return dmg;
+            }
         }
         /// <summary>
         /// Подсчет атаки или защиты Положительных и Отриацательных эффектов.
@@ -48,10 +60,10 @@ namespace MyMiniGame
         public static int Effects(this BaseFighter fighterOne, BaseFighter FighterTwo)
         {
             int dmg = 0;
-            var posEffects = FighterTwo.Effects.FindAll(x => x.IsPositive == true);
+            var posEffects = FighterTwo.Effects.FindAll(x => x.IsPositiveOrNegative == true);
             dmg += RunEffects(posEffects, FighterTwo);
 
-            var negEffects = FighterTwo.Effects.FindAll(x => x.IsPositive == false);
+            var negEffects = FighterTwo.Effects.FindAll(x => x.IsPositiveOrNegative == false);
             dmg += RunEffects(negEffects, FighterTwo);
 
             return dmg;
@@ -67,7 +79,7 @@ namespace MyMiniGame
             int dmg = 0;
             foreach (var effect in effects)
             {
-                dmg += effect.Run(fighter);
+                dmg += effect.Run(dmg);
                 if (effect.Ticks <= 0)
                     fighter.Effects.Remove(effect);
             }

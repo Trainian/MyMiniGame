@@ -90,14 +90,13 @@ namespace MyMiniGame.Fighters.Classes
             {
                 // Ищим эффекты, которые совпадают уже с существующими
                 // если существует, то обновляем эффект
-                // после чего удаляем их из новых, которые уже обновили старые
                 foreach (var myEffect in _effects)
                 {
                     foreach (var newEffect in value)
                     {
                         if (myEffect.Name == newEffect.Name)
                         {
-                            myEffect.Ticks = newEffect.Ticks;
+                            myEffect.SetTicks();
                             value.Remove(newEffect);
                         }
                     }
@@ -118,45 +117,6 @@ namespace MyMiniGame.Fighters.Classes
             Mana = Intellegence * 10;
             _effects = new List<IEffect>();
             Level = 1;
-        }
-
-        public int BaseAttack (BaseFighter enemy)
-        {
-            int dmg = Strength;
-            enemy.DefenceOnAttack(ref dmg);
-            enemy.NegativeActiveEffectsOnAttack(ref dmg);
-            return dmg;
-        }
-
-        public int MagicAttack (BaseFighter enemy)
-        {
-            var posEffects = Effects.FindAll(x => x.IsPositive == false);
-
-            return 0;
-        }
-
-        private int DefenceOnAttack (ref int dmg)
-        {
-            var posEffects = Effects.FindAll(x => x.IsPositive == true);
-            foreach (var ef in posEffects)
-            {
-                ef.Run(dmg);
-            }
-            return dmg;
-        }
-
-        private int NegativePositiveEffectsOnAttack (ref int dmg)
-        {
-            var negEffects = Effects.FindAll(x => x.IsPositive == false);
-            foreach (var ef in negEffects)
-            {
-                dmg = ef.Run(dmg);
-            }
-            return dmg;
-        }
-        private void NegativePassiveEffects ()
-        {
-
         }
     }
 }

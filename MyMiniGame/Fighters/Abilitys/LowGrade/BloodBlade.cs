@@ -18,12 +18,14 @@ namespace MyMiniGame.Fighters.Abilitys
 
         public string Name => "Слабый Кровавый меч";
 
-        public void Use(BaseFighter fighter, BaseFighter enemy)
+        public bool IsAttack => true;
+
+        public int Use(BaseFighter fighter, BaseFighter enemy)
         {
             int dmg = enemy.Defence - (fighter.Strength / 2);
             enemy.Effects.Add(new Bleeding());
-            enemy.Health -= dmg;
             messager?.Invoke($"{fighter.Name} Использует BloodBLade и наносит: {dmg}");
+            return dmg;
         }
     }
 }
