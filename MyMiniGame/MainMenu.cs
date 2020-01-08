@@ -20,8 +20,8 @@ namespace MyMiniGame
             do
             {
                 Console.Clear();
-                messager?.Invoke("Доброе пожаловать !");
-                messager?.Invoke("1 - Начать игру\n2 - Загрузить игру\n3 - О игре\n4 - Выход");
+                Console.WriteLine("Добро пожаловать !");
+                Console.WriteLine("1 - Начать игру\n2 - Загрузить игру\n3 - О игре\n4 - Выход");
                 strCh = Console.ReadLine();
                 if (int.TryParse(strCh, out ch))
                 {

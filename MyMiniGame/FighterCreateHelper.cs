@@ -33,6 +33,7 @@ namespace MyMiniGame
                 6 =>  new Thief(name),
                 _ => throw new Exception("Хакер, что ли ?"),
             };
+            fighter.Color = ConsoleColor.Green;
             return fighter;
         }
         public static void FighterCreateRandom(this BaseFighter fighter, int lvl)

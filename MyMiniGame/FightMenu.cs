@@ -10,57 +10,72 @@ namespace MyMiniGame
     {
         private BaseFighter _fighter;
         private BaseFighter _enemie;
+        private bool battleEnd = false;
         public FightMenu(BaseFighter fighter)
-
         {
             _fighter = fighter;
             _enemie = new Thief("enemie");
+            _enemie.Color = ConsoleColor.Red;
         }
         public void StartAtack()
         {
+            Console.Clear();
+            FighterInfoHelper.fightersNormalInfo(_fighter, _enemie);
             do
             {
-                int attack = ChooseAttack();
-                _enemie.Health -= attack;
-
-                FighterInfoHelper.fightersNormalInfo(_fighter, _enemie);
-                Console.ForegroundColor = _fighter.Color;
-                messager($"{_fighter.Name} нанёс {attack} урона {_fighter.Name}");
-                messager($"Оставшееся здоровье противника: {_fighter.Health}");
-
-                Console.ForegroundColor = ConsoleColor.White;
-                Console.WriteLine("Нажмите любую клавишу для продолжения...");
-                Console.ReadKey();
-
-            } while (_fighter.Health > 0 && _enemie.Health > 0);
+                ChooseAttack();
+                //Атака противника
+                if (_fighter.Health <= 0 || _enemie.Health <= 0)
+                    battleEnd = true;
+            } while (!battleEnd);
+            if(_fighter.Health <= 0 && _enemie.Health <= 0)
+                Console.WriteLine("Ничья");
+            else if (_fighter.Health <= 0)
+                Console.WriteLine("Вы умерли");
+            else
+                Console.WriteLine("Вы победили !");
+            Console.WriteLine("\n\nДля продолжения, нажмите любую кнопку...");
+            Console.ReadKey();
         }
-        private int ChooseAttack ()
+        private void ChooseAttack ()
         {
             string strCh;
             int ch;
+            bool atackUsed = false;
             do
             {
-                Console.Clear();
-                FighterInfoHelper.fighterSmallInfo(_fighter);
-                messager?.Invoke("Выбор атаки:");
-                messager?.Invoke($"1 - Обычная атака\n2 - Использовать способность ({_fighter.Ability.Cost} маны)\n3 - Сдаться");
+                Console.WriteLine("Выбор атаки:");
+                Console.WriteLine($"1 - Обычная атака\n2 - Использовать способность ({_fighter.Ability.Cost} маны)\n3 - Сдаться");
                 strCh = Console.ReadLine();
                 if (int.TryParse(strCh, out ch))
                 {
+                    Console.Clear();
+                    FighterInfoHelper.fightersNormalInfo(_fighter, _enemie);
                     switch (ch)
                     {
                         case 1:
-                            return _fighter.BaseAttack(_enemie);
+                            _fighter.BaseAttack(_enemie);
+                            atackUsed = true;
+                            break;
                         case 2:
-                            return _fighter.SuperAbility(_enemie);
+                            if(_fighter.Mana > _fighter.Ability.Cost)
+                            {
+                                _fighter.SuperAbility(_enemie);
+                                _fighter.Mana -= _fighter.Ability.Cost;
+                                atackUsed = true;
+                            }
+                            else
+                                Console.WriteLine("Не хватает маны.");
+                            break;
                         case 3:
-                            return int.MaxValue;
+                            _fighter.Health = 0;
+                            atackUsed = true;
+                            break;
                         default:
                             break;
                     }
                 }
-            } while (ch != 3);
-            return -1;
+            } while (atackUsed == false);
         }
     }
 }

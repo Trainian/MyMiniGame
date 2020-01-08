@@ -9,26 +9,48 @@ namespace MyMiniGame
 {
     internal static class FighterInfoHelper
     {
-        internal static void fighterFullInfo(this BaseFighter fighter)
+        public static void AttackMessage(BaseFighter fighter, BaseFighter enemy, int dmg)
+        {
+            Console.ForegroundColor = fighter.Color;
+            Console.WriteLine($"{fighter.Name} нанёс {dmg} урона {fighter.Name}");
+            Console.WriteLine($"Оставшееся здоровье противника: {enemy.Health}");
+            Console.ForegroundColor = ConsoleColor.White;
+        }
+        internal static void fighterFullInfo(BaseFighter fighter)
         {
             Console.ForegroundColor = ConsoleColor.Yellow;
-            messager?.Invoke($"Name:{fighter.Name}, Class:{fighter.Class}, Level:{fighter.Level}, Exp:{fighter.Exp}");
-            messager?.Invoke($"Health:{fighter.Health}, Mana:{fighter.Mana}");
-            messager?.Invoke($"Strength:{fighter.Strength}, Defence:{fighter.Defence}, Agility:{fighter.Agility}, Intellegence:{fighter.Intellegence}");
-            messager?.Invoke($"Abilitye:{fighter.Ability}, Info:{fighter.Ability.FullInfo}");
+            Console.WriteLine($"Name:{fighter.Name}, Class:{fighter.Class}, Level:{fighter.Level}, Exp:{fighter.Exp}");
+            Console.WriteLine($"Health:{fighter.Health}, Mana:{fighter.Mana}");
+            Console.WriteLine($"Strength:{fighter.Strength}, Defence:{fighter.Defence}, Agility:{fighter.Agility}, Intellegence:{fighter.Intellegence}");
+            Console.WriteLine($"Ability:{fighter.Ability.Name}, Info:{fighter.Ability.FullInfo}");
             Console.ForegroundColor = ConsoleColor.White;
         }
-        internal static void fighterSmallInfo(this BaseFighter fighterOne)
+        internal static void fighterSmallInfo(BaseFighter fighter)
         {
-            Console.ForegroundColor = fighterOne.Color; 
-            messager?.Invoke($"Fighter {fighterOne.Name}, Health: {fighterOne.Health}, Mana: {fighterOne.Mana}");
+            Console.ForegroundColor = fighter.Color;
+            Console.WriteLine($"Fighter {fighter.Name}, Health: {fighter.Health}, Mana: {fighter.Mana}");
             Console.ForegroundColor = ConsoleColor.White;
         }
-        internal static void fightersNormalInfo(BaseFighter fighterOne, BaseFighter fighterTwo)
+        internal static void fightersNormalInfo(BaseFighter fighter, BaseFighter enemy)
         {
+            fighterInfoCreater(fighter);
+            fighterInfoCreater(enemy);
+            String str = new String('-', 40);
+            Console.WriteLine(str);
+        }
+
+        private static void fighterInfoCreater (BaseFighter fighter)
+        {
+            var effects = fighter.Effects;
+            Console.ForegroundColor = fighter.Color;
+            Console.WriteLine($"Fighter {fighter.Name}, Health: {fighter.Health}, Mana:{fighter.Mana}");
+            Console.Write("Эффекты: ");
+            foreach (var item in effects)
+            {
+                Console.Write($" |-{item.Name}-| ");
+            }
+            Console.WriteLine();
             Console.ForegroundColor = ConsoleColor.White;
-            messager?.Invoke($"Fighter {fighterOne.Name} Health: {fighterOne.Health}");
-            messager?.Invoke($"Fighter {fighterTwo.Name} Health: {fighterTwo.Health}");
         }
         internal static void changeFighters<T> (ref T fighterOne, ref T fighterTwo)
         {

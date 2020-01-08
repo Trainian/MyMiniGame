@@ -19,9 +19,9 @@ namespace MyMiniGame
             do
             {
                 Console.Clear();
-                messager?.Invoke($"Добро пожаловать, {fighter.Name}");
-                messager?.Invoke("Что будем делать ?");
-                messager?.Invoke("1 - Найти противника\n2 - Повысить уровень\n3 - Магазин\n4 - Информация о герое\n5 - Выход в меню");
+                Console.WriteLine($"Добро пожаловать, {fighter.Name}");
+                Console.WriteLine("Что будем делать ?");
+                Console.WriteLine("1 - Найти противника\n2 - Повысить уровень\n3 - Магазин\n4 - Информация о герое\n5 - Выход в меню");
                 strCh = Console.ReadLine();
                 if(int.TryParse(strCh,out ch))
                 {
@@ -39,7 +39,7 @@ namespace MyMiniGame
                             break;
                         case 4:
                             FighterInfoHelper.fighterFullInfo(fighter);
-                            messager?.Invoke("Для продолжения, нажмите 'Enter'...");
+                            Console.WriteLine("Для продолжения, нажмите 'Enter'...");
                             Console.ReadLine();
                             break;
                         case 5:

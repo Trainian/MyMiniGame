@@ -15,17 +15,18 @@ namespace MyMiniGame
         /// <param name="fighterOne">Атакующий</param>
         /// <param name="fighterTwo">Защищающийся</param>
         /// <returns>Возвращает атаку = Силе + Эффекты</returns>
-        public static int BaseAttack(this BaseFighter fighterOne, BaseFighter fighterTwo)
+        public static void BaseAttack(this BaseFighter fighter, BaseFighter enemy)
         {
             int dmg = 0;
-            dmg += fighterOne.Strength;
+            dmg += fighter.Strength;
             //Находим все Атакующие\Пассивные эффекты
-            var effects = fighterOne.Effects.FindAll(x => x.IsActiveOrPassive == true && x.IsActiveOrPassive == false);
+            var effects = fighter.Effects.FindAll(x => x.IsActiveOrPassive == true && x.IsActiveOrPassive == false);
             foreach (var effect in effects)
             {
                 effect.Run(dmg);
             }
-            return dmg;
+            enemy.Health -= dmg;
+            FighterInfoHelper.AttackMessage(fighter,enemy,dmg);
         }
         /// <summary>
         /// Использование супер-способностей
@@ -33,22 +34,15 @@ namespace MyMiniGame
         /// <param name="fighterOne">Атакующий</param>
         /// <param name="fighterTwo">Защищающийся</param>
         /// <returns>Накладывает положительные или отрицательные эффекты</returns>
-        public static int SuperAbility(this BaseFighter fighterOne, BaseFighter fighterTwo)
+        public static void SuperAbility(this BaseFighter fighter, BaseFighter enemy)
         {
-            // Если Абилка не атакующая то используем и возвращаем -1, для обозначения что была не атакующая абилка
-            if (fighterOne.Ability.IsAttack == false)
+            if (fighter.Ability.IsAttack == false)
             {
-                fighterOne.Ability.Use(fighterOne, fighterTwo);
-                return -1;
+                fighter.Ability.Use(fighter, enemy);
             }
             else
             {
-                int dmg = 0;
-
-                fighterOne.Mana -= fighterOne.Ability.Cost;
-                dmg += fighterOne.Ability.Use(fighterOne, fighterTwo);
-
-                return dmg;
+                fighter.Ability.Use(fighter, enemy);
             }
         }
         /// <summary>
@@ -57,16 +51,15 @@ namespace MyMiniGame
         /// <param name="fighterOne">Атакующий</param>
         /// <param name="FighterTwo">Защищающийся</param>
         /// <returns>Возвращается разница между уроном эффектов</returns>
-        public static int Effects(this BaseFighter fighterOne, BaseFighter FighterTwo)
+        public static void Effects(this BaseFighter fighter, BaseFighter enemy)
         {
             int dmg = 0;
-            var posEffects = FighterTwo.Effects.FindAll(x => x.IsPositiveOrNegative == true);
-            dmg += RunEffects(posEffects, FighterTwo);
+            var posEffects = enemy.Effects.FindAll(x => x.IsPositiveOrNegative == true);
+            dmg += RunEffects(posEffects, enemy);
 
-            var negEffects = FighterTwo.Effects.FindAll(x => x.IsPositiveOrNegative == false);
-            dmg += RunEffects(negEffects, FighterTwo);
+            var negEffects = enemy.Effects.FindAll(x => x.IsPositiveOrNegative == false);
+            dmg += RunEffects(negEffects, enemy);
 
-            return dmg;
         }
         /// <summary>
         /// Выполняет эффекты и удаляет уже завершившиеся
