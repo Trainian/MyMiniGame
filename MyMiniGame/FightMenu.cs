@@ -1,4 +1,5 @@
 ﻿using MyMiniGame.Fighters.Classes;
+using MyMiniGame.Fighters.Effects;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -21,12 +22,15 @@ namespace MyMiniGame
         {
             Console.Clear();
             FighterInfoHelper.fightersNormalInfo(_fighter, _enemie);
+            _fighter.Effects.Add(new Bleeding());
             do
             {
                 ChooseAttack();
-                //Атака противника
+
                 if (_fighter.Health <= 0 || _enemie.Health <= 0)
                     battleEnd = true;
+                //TODO: Атака противника
+                Battle.Effects(_enemie, _fighter);
             } while (!battleEnd);
             if(_fighter.Health <= 0 && _enemie.Health <= 0)
                 Console.WriteLine("Ничья");

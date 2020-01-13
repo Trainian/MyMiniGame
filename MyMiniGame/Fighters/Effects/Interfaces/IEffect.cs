@@ -10,11 +10,11 @@ namespace MyMiniGame.Fighters.Effects.Interfaces
         /// <summary>
         /// Название эффекта
         /// </summary>
-        string Name { get;}
+        string Name { get; }
         /// <summary>
         /// Описание эффекта
         /// </summary>
-        string FullName { get;}
+        string FullName { get; }
         /// <summary>
         /// Эффект является атакующим или защитным
         /// True = Атакующий
@@ -32,7 +32,7 @@ namespace MyMiniGame.Fighters.Effects.Interfaces
         /// True = Активный
         /// False = Пассивный
         /// </summary>
-        bool IsActiveOrPassive { get;  }
+        bool IsActiveOrPassive { get; }
         /// <summary>
         /// Тики, сколько длится действие, в ходах
         /// -1 - Постоянно, 0+ - Длится опередлённое кол-во ходов
@@ -45,6 +45,6 @@ namespace MyMiniGame.Fighters.Effects.Interfaces
         /// <summary>
         /// Действие эффекта
         /// </summary>
-        int Run(int dmg);
+        void Run(BaseFighter fighter);
     }
 }

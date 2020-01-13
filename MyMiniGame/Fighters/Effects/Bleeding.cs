@@ -18,11 +18,10 @@ namespace MyMiniGame.Fighters.Effects
         {
             Ticks = 3;
         }
-        public int Run(int dmg)
+        public void Run(BaseFighter fighter)
         {
-            dmg = 1;
+            fighter.TempDamage += 1;
             Ticks--;
-            return dmg;
         }
     }
 }

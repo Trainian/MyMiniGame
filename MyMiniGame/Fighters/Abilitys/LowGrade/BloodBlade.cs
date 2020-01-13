@@ -24,7 +24,7 @@ namespace MyMiniGame.Fighters.Abilitys
         {
             int dmg = enemy.Defence - (fighter.Strength / 2);
             enemy.Effects.Add(new Bleeding());
-            messager?.Invoke($"{fighter.Name} Использует BloodBLade и наносит: {dmg}");
+            Console.WriteLine($"{fighter.Name} Использует BloodBLade и наносит: {dmg}");
             return dmg;
         }
     }

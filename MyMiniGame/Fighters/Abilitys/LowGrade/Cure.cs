@@ -23,9 +23,9 @@ namespace MyMiniGame.Fighters.Abilitys
         public int Use(BaseFighter fighterOne, BaseFighter fighterTwo)
         {
             int hlth = (int)(fighterOne.Intellegence * 0.25);
-            messager?.Invoke($"---> {fighterOne.Name} лечится на {hlth}! <---");
+            Console.WriteLine($"---> {fighterOne.Name} лечится на {hlth}! <---");
             fighterOne.Health += hlth;
-            return -1;
+            return 0;
         }
     }
 }
