@@ -67,7 +67,7 @@ namespace MyMiniGame.Fighters.Classes
         /// Переменная для подсчета урона, наносится после прохождения
         /// по всем эффектам в конце
         /// </summary>
-        public uint TempDamage { get; set; }
+        public uint TempDamage { get; set; } = 0;
         /// <summary>
         /// Спецспособность
         /// Каждый класс может иметь только свои Способности
@@ -92,16 +92,15 @@ namespace MyMiniGame.Fighters.Classes
             get => _effects;
             set
             {
-                // Ищим эффекты, которые совпадают уже с существующими
-                // если существует, то обновляем эффект
+                // Ищем эффекты, которые совпадают уже с существующими
+                // если существует, то заменяем эффект
                 foreach (var myEffect in _effects)
                 {
                     foreach (var newEffect in value)
                     {
                         if (myEffect.Name == newEffect.Name)
                         {
-                            myEffect.SetTicks();
-                            value.Remove(newEffect);
+                            value.Remove(myEffect);
                         }
                     }
                 }
@@ -117,8 +116,8 @@ namespace MyMiniGame.Fighters.Classes
         public BaseFighter(string name)
         {
             Name = name;
-            Health = Strength * 10;
-            Mana = Intellegence * 10;
+            Health = Strength * 100;
+            Mana = Intellegence * 100;
             _effects = new List<IEffect>();
             Level = 1;
         }

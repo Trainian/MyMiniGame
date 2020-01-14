@@ -14,18 +14,21 @@ namespace MyMiniGame.Fighters.Abilitys
 
         public string FullInfo => "Кровавый меч, наносит урон и накладывать эффект кровотечения";
 
-        public int Cost => 15;
+        public int Cost => 50;
 
         public string Name => "Слабый Кровавый меч";
 
-        public bool IsAttack => true;
-
-        public int Use(BaseFighter fighter, BaseFighter enemy)
+        public void Use(BaseFighter fighter, BaseFighter enemy)
         {
-            int dmg = enemy.Defence - (fighter.Strength / 2);
+            int dmg = (fighter.Strength * 10 / 3) - enemy.Defence;
+            if (dmg < 0)
+                dmg = 0;
+
+            enemy.TempDamage = (uint)dmg;
+            fighter.Mana -= Cost;
             enemy.Effects.Add(new Bleeding());
-            Console.WriteLine($"{fighter.Name} Использует BloodBLade и наносит: {dmg}");
-            return dmg;
+            Console.WriteLine($"{fighter.Name} Использует BloodBLade и наносит: {enemy.TempDamage}");
+            enemy.Health -= (int)enemy.TempDamage;
         }
     }
 }

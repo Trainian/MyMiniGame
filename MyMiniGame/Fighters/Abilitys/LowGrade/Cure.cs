@@ -14,18 +14,16 @@ namespace MyMiniGame.Fighters.Abilitys
         public List<EnumClasses> IdClass => new List<EnumClasses>(new EnumClasses[] {EnumClasses.Priest});
         public string FullInfo => "Восстанавливает немного здоровья";
 
-        public int Cost => 10;
+        public int Cost => 30;
 
         public string Name => "Лёгкое Лечение";
 
-        public bool IsAttack => false;
-
-        public int Use(BaseFighter fighterOne, BaseFighter fighterTwo)
+        public void Use(BaseFighter fighter, BaseFighter enemy)
         {
-            int hlth = (int)(fighterOne.Intellegence * 0.25);
-            Console.WriteLine($"---> {fighterOne.Name} лечится на {hlth}! <---");
-            fighterOne.Health += hlth;
-            return 0;
+            int hlth = (int)(fighter.Intellegence * 0.25);
+            fighter.Mana -= Cost;
+            Console.WriteLine($"---> {fighter.Name} лечится на {hlth}! <---");
+            fighter.Health += hlth;
         }
     }
 }

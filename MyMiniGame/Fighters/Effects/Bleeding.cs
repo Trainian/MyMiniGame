@@ -6,21 +6,24 @@ using System.Text;
 
 namespace MyMiniGame.Fighters.Effects
 {
-    struct Bleeding : IEffect
+    class Bleeding : IEffect
     {
+        public Bleeding()
+        {
+            Ticks = 3;
+        }
+
         public string Name => "Кровотечение";
         public string FullName => "В течении определенного времени наносит не большой урон";
         public bool IsAttackOrDeffence => true;
         public bool IsPositiveOrNegative => false;
         public bool IsActiveOrPassive => false;
         public sbyte Ticks { get; set; }
-        public void SetTicks()
-        {
-            Ticks = 3;
-        }
         public void Run(BaseFighter fighter)
         {
-            fighter.TempDamage += 1;
+            int dmg = 5;
+            fighter.Health -= dmg;
+            Console.WriteLine($"{fighter.Name} получает урон от кровотечения {dmg}");
             Ticks--;
         }
     }

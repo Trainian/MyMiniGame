@@ -17,16 +17,16 @@ namespace MyMiniGame
         /// <returns>Возвращает атаку = Силе + Эффекты</returns>
         public static void BaseAttack(this BaseFighter fighter, BaseFighter enemy)
         {
-            int dmg = 0;
-            dmg += fighter.Strength;
+            enemy.TempDamage += (uint)((fighter.Strength * 10) - enemy.Defence);
             //Находим все Атакующие\Пассивные эффекты и прибавляем к атаке
-            var effects = fighter.Effects.FindAll(x => x.IsActiveOrPassive == true && x.IsActiveOrPassive == false);
+            var effects = fighter.Effects.FindAll(x => x.IsAttackOrDeffence == true && x.IsActiveOrPassive == false);
             foreach (var effect in effects)
             {
-                effect.Run(dmg);
+                effect.Run(enemy);
             }
-            enemy.Health -= dmg;
-            FighterInfoHelper.AttackMessage(fighter,enemy,dmg);
+            enemy.Health -= (int)enemy.TempDamage;
+            FighterInfoHelper.AttackMessage(fighter, enemy, (int)enemy.TempDamage);
+            enemy.TempDamage = 0;
         }
         /// <summary>
         /// Использование супер-способностей
@@ -69,7 +69,7 @@ namespace MyMiniGame
         {
             foreach (var effect in effects)
             {
-                effect.Run(0);
+                effect.Run(fighter);
                 if (effect.Ticks <= 0)
                     fighter.Effects.Remove(effect);
             }

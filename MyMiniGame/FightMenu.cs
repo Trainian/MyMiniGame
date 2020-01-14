@@ -22,7 +22,6 @@ namespace MyMiniGame
         {
             Console.Clear();
             FighterInfoHelper.fightersNormalInfo(_fighter, _enemie);
-            _fighter.Effects.Add(new Bleeding());
             do
             {
                 ChooseAttack();
@@ -45,7 +44,7 @@ namespace MyMiniGame
         {
             string strCh;
             int ch;
-            bool atackUsed = false;
+            bool attackUsed = false;
             do
             {
                 Console.WriteLine("Выбор атаки:");
@@ -59,27 +58,26 @@ namespace MyMiniGame
                     {
                         case 1:
                             _fighter.BaseAttack(_enemie);
-                            atackUsed = true;
+                            attackUsed = true;
                             break;
                         case 2:
                             if(_fighter.Mana > _fighter.Ability.Cost)
                             {
                                 _fighter.SuperAbility(_enemie);
-                                _fighter.Mana -= _fighter.Ability.Cost;
-                                atackUsed = true;
+                                attackUsed = true;
                             }
                             else
                                 Console.WriteLine("Не хватает маны.");
                             break;
                         case 3:
                             _fighter.Health = 0;
-                            atackUsed = true;
+                            attackUsed = true;
                             break;
                         default:
                             break;
                     }
                 }
-            } while (atackUsed == false);
+            } while (attackUsed == false);
         }
     }
 }

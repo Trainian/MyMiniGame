@@ -15,9 +15,7 @@ namespace MyMiniGame.Fighters.Abilitys
 
         public string Name => "Лёгкий рубящий удар мечом";
 
-        public bool IsAttack => true;
-
-        public int Use(BaseFighter fighter, BaseFighter enemy)
+        public void Use(BaseFighter fighter, BaseFighter enemy)
         {
             //TODO: Реализовать абилку для SwordSlash
             throw new NotImplementedException();

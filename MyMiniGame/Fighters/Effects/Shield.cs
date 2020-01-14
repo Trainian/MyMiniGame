@@ -7,18 +7,19 @@ using System.Text;
 
 namespace MyMiniGame.Fighters.Effects
 {
-    struct Shield : IEffect
+    class Shield : IEffect
     {
+        public Shield(sbyte ticks)
+        {
+            Ticks = 3;
+        }
+
         public string Name => "Магический Щит";
         public string FullName => "Магический щит, которой даёт небольшую защиту 10% от атаки";
         public sbyte Ticks { get; set; }
         public bool IsAttackOrDeffence => true;
         public bool IsPositiveOrNegative => true;
         public bool IsActiveOrPassive => false;
-        public void SetTicks()
-        {
-            Ticks = 5;
-        }
         public void Run(BaseFighter fighter)
         {
             fighter.TempDamage = (fighter.TempDamage / 100) * 90;

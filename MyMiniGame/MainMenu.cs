@@ -41,7 +41,6 @@ namespace MyMiniGame
                         case 4:
                             break;
                         default:
-                            throw new NotSupportedException("Хакер, что ли");
                             break;
                     }
                 }
