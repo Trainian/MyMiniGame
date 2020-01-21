@@ -9,7 +9,7 @@ namespace MyMiniGame.Fighters.Classes
     /// Класс : Вор
     /// </summary>
     /// 
-    class Thief : BaseFighter
+    public class Thief : BaseFighter
     {
         public override EnumClasses Class { get; set; } = EnumClasses.Thief;
         public override int Strength { get; set; } = 5;

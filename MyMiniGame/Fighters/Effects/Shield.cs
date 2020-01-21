@@ -7,9 +7,9 @@ using System.Text;
 
 namespace MyMiniGame.Fighters.Effects
 {
-    class Shield : IEffect
+    public class Shield : IEffect
     {
-        public Shield(sbyte ticks)
+        public Shield()
         {
             Ticks = 3;
         }

@@ -6,7 +6,7 @@ using System.Text;
 
 namespace MyMiniGame.Fighters.Effects
 {
-    class Bleeding : IEffect
+    public class Bleeding : IEffect
     {
         public Bleeding()
         {

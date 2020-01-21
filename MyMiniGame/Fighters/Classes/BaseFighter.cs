@@ -10,7 +10,7 @@ namespace MyMiniGame.Fighters.Classes
     {
         private IAbility _ability;
         private List<IEffect> _effects;
-
+        public List<IEffect> Effects { get => _effects; private set => _effects = value; }
         /// <summary>
         /// Имя персонажа, является идентификатором
         /// </summary>
@@ -87,27 +87,21 @@ namespace MyMiniGame.Fighters.Classes
         /// <summary>
         /// Наложенные эффекты, будь то защита, отравление и т.д.
         /// </summary>
-        public virtual List<IEffect> Effects
+        public void AddEffect(IEffect newEffect)
         {
-            get => _effects;
-            set
-            {
-                // Ищем эффекты, которые совпадают уже с существующими
-                // если существует, то заменяем эффект
-                foreach (var myEffect in _effects)
+            if (_effects.Count != 0)
+                foreach (var myEffect in _effects.ToArray())
                 {
-                    foreach (var newEffect in value)
+                    if (myEffect.Name == newEffect.Name)
                     {
-                        if (myEffect.Name == newEffect.Name)
-                        {
-                            value.Remove(myEffect);
-                        }
+                        _effects.Remove(myEffect);
                     }
                 }
-                // Перебираем эффекты, которые не существовали
-                // и добавляем в список эффектов
-                value.ForEach(x => _effects.Add(x));
-            }
+            _effects.Add(newEffect);
+        }
+        public void RemoveEffect(IEffect effect)
+        {
+            _effects.Remove(effect);
         }
         /// <summary>
         /// Конструктор для задания Жизней и Маны

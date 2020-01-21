@@ -26,7 +26,7 @@ namespace MyMiniGame.Fighters.Abilitys
 
             enemy.TempDamage = (uint)dmg;
             fighter.Mana -= Cost;
-            enemy.Effects.Add(new Bleeding());
+            enemy.AddEffect(new Bleeding());
             Console.WriteLine($"{fighter.Name} Использует BloodBLade и наносит: {enemy.TempDamage}");
             enemy.Health -= (int)enemy.TempDamage;
         }
