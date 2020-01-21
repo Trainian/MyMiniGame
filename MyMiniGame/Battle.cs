@@ -17,9 +17,10 @@ namespace MyMiniGame
         /// <returns>Возвращает атаку = Силе + Эффекты</returns>
         public static void BaseAttack(this BaseFighter fighter, BaseFighter enemy)
         {
+            //TODO: По думать по поводу того что бы убрать временные переменные в бойцах
             enemy.TempDamage += (uint)((fighter.Strength * 10) - enemy.Defence);
-            //Находим все Атакующие\Пассивные эффекты и прибавляем к атаке
-            var effects = fighter.GetEffects().FindAll(x => x.IsAttackOrDeffence == true && x.IsActiveOrPassive == false);
+            //Находим все Атакующие\Активные эффекты и прибавляем к атаке
+            var effects = fighter.Effects.FindAll(x => x.IsAttackOrDeffence == true && x.IsActiveOrPassive == false);
             foreach (var effect in effects)
             {
                 effect.Run(enemy);
@@ -37,6 +38,14 @@ namespace MyMiniGame
         public static void SuperAbility(this BaseFighter fighter, BaseFighter enemy)
         {
             fighter.Ability.Use(fighter, enemy);
+            if(fighter.Ability.IsAttack)
+            {
+                var effects = fighter.Effects.FindAll(x => x.IsAttackOrDeffence == true && x.IsActiveOrPassive == false);
+                foreach (var effect in effects)
+                {
+                    effect.Run(enemy);
+                }
+            }
         }
         /// <summary>
         /// Подсчет атаки или защиты Положительных и Отриацательных эффектов.
@@ -46,17 +55,16 @@ namespace MyMiniGame
         /// <returns>Возвращается разница между уроном эффектов</returns>
         public static void Effects(BaseFighter fighter, BaseFighter enemy)
         {
-            //Сделать перебор только по пассивным эффектам и запускать их
-            var posEffects = fighter.GetEffects().FindAll(x => x.IsPositiveOrNegative == true && x.IsActiveOrPassive == false);
+            var posEffects = fighter.Effects.FindAll(x => x.IsPositiveOrNegative == true && x.IsActiveOrPassive == false);
             RunEffects(posEffects, fighter);
 
-            var negEffects = fighter.GetEffects().FindAll(x => x.IsPositiveOrNegative == false && x.IsActiveOrPassive == false);
+            var negEffects = fighter.Effects.FindAll(x => x.IsPositiveOrNegative == false && x.IsActiveOrPassive == false);
             RunEffects(negEffects, fighter);
 
-            posEffects = enemy.GetEffects().FindAll(x => x.IsPositiveOrNegative == true && x.IsActiveOrPassive == false);
+            posEffects = enemy.Effects.FindAll(x => x.IsPositiveOrNegative == true && x.IsActiveOrPassive == false);
             RunEffects(posEffects, enemy);
 
-            negEffects = enemy.GetEffects().FindAll(x => x.IsPositiveOrNegative == false && x.IsActiveOrPassive == false);
+            negEffects = enemy.Effects.FindAll(x => x.IsPositiveOrNegative == false && x.IsActiveOrPassive == false);
             RunEffects(negEffects, enemy);
         }
         /// <summary>

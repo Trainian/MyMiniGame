@@ -24,6 +24,12 @@ namespace MyMiniGame.Fighters.Abilitys.Interfaces
         /// </summary>
         int Cost { get; }
         /// <summary>
+        /// Абилка атакующая ?
+        /// true - Да
+        /// false - Нет
+        /// </summary>
+        bool IsAttack { get; }
+        /// <summary>
         /// Использовать Способность
         /// </summary>
         /// <param name="fighter">Атакующий</param>

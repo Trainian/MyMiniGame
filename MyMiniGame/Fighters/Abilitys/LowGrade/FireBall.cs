@@ -15,6 +15,8 @@ namespace MyMiniGame.Fighters.Abilitys
 
         public string Name => "Малый огенный шар";
 
+        public bool IsAttack => true;
+
         public void Use(BaseFighter fighter, BaseFighter enemy)
         {
             //TODO: Реализовать абилку для FireBall

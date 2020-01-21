@@ -18,6 +18,8 @@ namespace MyMiniGame.Fighters.Abilitys
 
         public string Name => "Слабый Кровавый меч";
 
+        public bool IsAttack => true;
+
         public void Use(BaseFighter fighter, BaseFighter enemy)
         {
             int dmg = (fighter.Strength * 10 / 3) - enemy.Defence;

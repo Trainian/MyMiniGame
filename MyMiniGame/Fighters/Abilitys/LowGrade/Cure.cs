@@ -18,6 +18,8 @@ namespace MyMiniGame.Fighters.Abilitys
 
         public string Name => "Лёгкое Лечение";
 
+        public bool IsAttack => false;
+
         public void Use(BaseFighter fighter, BaseFighter enemy)
         {
             int hlth = (int)(fighter.Intellegence * 0.25);
