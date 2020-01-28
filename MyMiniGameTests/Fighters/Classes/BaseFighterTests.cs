@@ -27,7 +27,9 @@ namespace MyMiniGame.Fighters.Classes.Tests
 
             fighterTest.AddEffect(new Bleeding());
 
-            CollectionAssert.AreEqual(fighter.GetEffects(), fighterTest.GetEffects());
+            Assert.AreEqual(fighter.Effects.Count, fighter.Effects.Count);
+            Assert.AreEqual(fighter.Effects[0].FullName, fighterTest.Effects[0].FullName);
+            Assert.AreEqual(fighter.Effects[0].Ticks, fighterTest.Effects[0].Ticks);
         }
     }
 }

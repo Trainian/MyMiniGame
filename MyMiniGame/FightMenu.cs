@@ -22,15 +22,21 @@ namespace MyMiniGame
         {
             Console.Clear();
             FighterInfoHelper.fightersNormalInfo(_fighter, _enemie);
+
+
             do
             {
                 ChooseAttack();
 
                 if (_fighter.Health <= 0 || _enemie.Health <= 0)
                     battleEnd = true;
+
                 //TODO: Атака противника
+
                 Battle.Effects(_enemie, _fighter);
             } while (!battleEnd);
+
+
             if(_fighter.Health <= 0 && _enemie.Health <= 0)
                 Console.WriteLine("Ничья");
             else if (_fighter.Health <= 0)

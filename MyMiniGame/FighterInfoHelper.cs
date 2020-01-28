@@ -41,7 +41,7 @@ namespace MyMiniGame
 
         private static void fighterInfoCreater (BaseFighter fighter)
         {
-            var effects = fighter.GetEffects();
+            var effects = fighter.Effects;
             Console.ForegroundColor = fighter.Color;
             Console.WriteLine($"Fighter {fighter.Name}, Health: {fighter.Health}, Mana:{fighter.Mana}");
             Console.Write("Эффекты: ");

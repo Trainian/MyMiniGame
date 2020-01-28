@@ -31,6 +31,7 @@ namespace MyMiniGame.Fighters.Abilitys.Interfaces
         bool IsAttack { get; }
         /// <summary>
         /// Использовать Способность
+        /// Если способность атакующая, то добавляет урон в TempDamage противника
         /// </summary>
         /// <param name="fighter">Атакующий</param>
         /// <param name="enemy">Защищающийся</param>
