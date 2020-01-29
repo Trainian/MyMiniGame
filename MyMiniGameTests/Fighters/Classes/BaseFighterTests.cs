@@ -8,7 +8,7 @@ using System.Text;
 
 namespace MyMiniGame.Fighters.Classes.Tests
 {
-    [TestClass()]
+    [TestClass]
     public class BaseFighterTests
     {
         BaseFighter fighter, fighterTest;
@@ -19,7 +19,7 @@ namespace MyMiniGame.Fighters.Classes.Tests
             fighterTest = new Thief("TestClass");
         }
 
-        [TestMethod()]
+        [TestMethod]
         public void Effects_ReNewEffect_OneEffect()
         {
             fighter.AddEffect(new Bleeding());
@@ -27,9 +27,9 @@ namespace MyMiniGame.Fighters.Classes.Tests
 
             fighterTest.AddEffect(new Bleeding());
 
-            Assert.AreEqual(fighter.Effects.Count, fighter.Effects.Count);
-            Assert.AreEqual(fighter.Effects[0].FullName, fighterTest.Effects[0].FullName);
-            Assert.AreEqual(fighter.Effects[0].Ticks, fighterTest.Effects[0].Ticks);
+            Assert.AreEqual(fighter.GetEffects().Count, fighter.GetEffects().Count);
+            Assert.AreEqual(fighter.GetEffects()[0].FullName, fighterTest.GetEffects()[0].FullName);
+            Assert.AreEqual(fighter.GetEffects()[0].Ticks, fighterTest.GetEffects()[0].Ticks);
         }
     }
 }

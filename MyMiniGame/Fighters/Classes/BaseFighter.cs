@@ -10,7 +10,6 @@ namespace MyMiniGame.Fighters.Classes
     {
         private IAbility _ability;
         private List<IEffect> _effects;
-        public List<IEffect> Effects { get => _effects; private set => _effects = value; }
         /// <summary>
         /// Имя персонажа, является идентификатором
         /// </summary>
@@ -72,7 +71,7 @@ namespace MyMiniGame.Fighters.Classes
         /// Спецспособность
         /// Каждый класс может иметь только свои Способности
         /// </summary>
-        public virtual IAbility Ability
+        public IAbility Ability
         {
             get => _ability;
             set
@@ -102,6 +101,10 @@ namespace MyMiniGame.Fighters.Classes
         public void RemoveEffect(IEffect effect)
         {
             _effects.Remove(effect);
+        }
+        public List<IEffect> GetEffects()
+        {
+            return _effects;
         }
         /// <summary>
         /// Конструктор для задания Жизней и Маны
