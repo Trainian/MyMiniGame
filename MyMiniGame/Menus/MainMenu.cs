@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using static MyMiniGame.Messager;
 
-namespace MyMiniGame
+namespace MyMiniGame.Menus
 {
     class MainMenu
     {

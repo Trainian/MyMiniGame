@@ -7,6 +7,7 @@ using System.Text;
 using static MyMiniGame.Messager;
 using static MyMiniGame.Fighters.LevelChange;
 using MyMiniGame.Fighters.Effects;
+using MyMiniGame.Menus;
 
 namespace MyMiniGame
 {

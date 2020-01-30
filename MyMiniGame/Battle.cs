@@ -3,7 +3,6 @@ using MyMiniGame.Fighters.Effects.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Text;
-using MyMiniGame.Fighters.Effects.Interfaces;
 using static MyMiniGame.Messager;
 
 namespace MyMiniGame
@@ -15,7 +14,6 @@ namespace MyMiniGame
         /// </summary>
         /// <param name="fighterOne">Атакующий</param>
         /// <param name="fighterTwo">Защищающийся</param>
-        /// <returns>Возвращает атаку = Силе + Эффекты</returns>
         public static void BaseAttack(this BaseFighter fighter, BaseFighter enemy)
         {
             //TODO: По думать по поводу того что бы убрать временные переменные в бойцах
@@ -35,7 +33,6 @@ namespace MyMiniGame
         /// </summary>
         /// <param name="fighterOne">Атакующий</param>
         /// <param name="fighterTwo">Защищающийся</param>
-        /// <returns>Накладывает положительные или отрицательные эффекты</returns>
         public static void SuperAbility(this BaseFighter fighter, BaseFighter enemy)
         {
             fighter.Ability.Use(fighter, enemy);
@@ -53,7 +50,6 @@ namespace MyMiniGame
         /// </summary>
         /// <param name="fighterOne">Атакующий</param>
         /// <param name="FighterTwo">Защищающийся</param>
-        /// <returns>Возвращается разница между уроном эффектов</returns>
         public static void Effects(BaseFighter fighter, BaseFighter enemy)
         {
             var posEffects = fighter.GetEffects().FindAll(x => x.IsPositiveOrNegative == true && x.IsActiveOrPassive == false);
@@ -73,7 +69,6 @@ namespace MyMiniGame
         /// </summary>
         /// <param name="effects">Лист эффектов для выполнения, Негативные или Положительные</param>
         /// <param name="fighter">Боей, чьи эффекты будут запускаться</param>
-        /// <returns>Возвращает урон от эффектов в int</returns>
         public static void RunEffects (List<IEffect> effects, BaseFighter fighter)
         {
             foreach (var effect in effects)
