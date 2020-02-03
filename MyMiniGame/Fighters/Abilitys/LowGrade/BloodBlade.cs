@@ -22,7 +22,7 @@ namespace MyMiniGame.Fighters.Abilitys
 
         public void Use(BaseFighter fighter, BaseFighter enemy)
         {
-            int dmg = (fighter.Strength * 10 / 3) - enemy.Defence;
+            int dmg = ((fighter.Strength * 15) - enemy.Defence);
             if (dmg < 0)
                 dmg = 0;
 

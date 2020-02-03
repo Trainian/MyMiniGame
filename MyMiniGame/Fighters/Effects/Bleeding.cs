@@ -21,7 +21,7 @@ namespace MyMiniGame.Fighters.Effects
         public sbyte Ticks { get; set; }
         public void Run(BaseFighter fighter)
         {
-            int dmg = 5;
+            int dmg = fighter.Health / 100 * 5;
             fighter.Health -= dmg;
             Console.WriteLine($"{fighter.Name} получает урон от кровотечения {dmg}");
             Ticks--;

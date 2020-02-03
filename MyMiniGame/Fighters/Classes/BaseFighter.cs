@@ -113,10 +113,18 @@ namespace MyMiniGame.Fighters.Classes
         public BaseFighter(string name)
         {
             Name = name;
-            Health = Strength * 100;
-            Mana = Intellegence * 100;
             _effects = new List<IEffect>();
             Level = 1;
+            SetParametersToNormalize();
+        }
+
+        /// <summary>
+        /// Установить/Восстановить Жизни и Ману
+        /// </summary>
+        public void SetParametersToNormalize ()
+        {
+            Health = Strength * 100;
+            Mana = Intellegence * 20;
         }
     }
 }
