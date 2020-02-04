@@ -40,6 +40,10 @@ namespace MyMiniGame.Menus
                 Battle.Effects(_enemy, _fighter);
                 if (_fighter.Health <= 0 || _enemy.Health <= 0)
                     battleEnd = true;
+
+                String str = new String('-', 40);
+                Console.WriteLine(str);
+                FighterInfoHelper.fightersNormalInfo(_fighter, _enemy);
             } while (!battleEnd);
 
 
@@ -74,7 +78,6 @@ namespace MyMiniGame.Menus
                 if (int.TryParse(strCh, out ch))
                 {
                     Console.Clear();
-                    FighterInfoHelper.fightersNormalInfo(_fighter, _enemy);
                     switch (ch)
                     {
                         case 1:

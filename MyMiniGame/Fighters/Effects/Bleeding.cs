@@ -15,7 +15,7 @@ namespace MyMiniGame.Fighters.Effects
 
         public string Name => "Кровотечение";
         public string FullName => "В течении определенного времени наносит не большой урон";
-        public bool IsAttackOrDeffence => true;
+        public bool IsAttackOrDeffence => false;
         public bool IsPositiveOrNegative => false;
         public bool IsActiveOrPassive => false;
         public sbyte Ticks { get; set; }

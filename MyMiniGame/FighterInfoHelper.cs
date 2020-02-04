@@ -18,8 +18,7 @@ namespace MyMiniGame
         public static void AttackMessage(BaseFighter fighter, BaseFighter enemy, int dmg)
         {
             Console.ForegroundColor = fighter.Color;
-            Console.WriteLine($"{fighter.Name} нанёс {dmg} урона {enemy.Name}");
-            Console.WriteLine($"Оставшееся здоровье {enemy.Name}: {enemy.Health}");
+            Console.WriteLine($"{fighter.Name} нанёс {dmg} урона {enemy.Name}\n");
             Console.ForegroundColor = ConsoleColor.White;
         }
         /// <summary>

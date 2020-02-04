@@ -25,6 +25,7 @@ namespace MyMiniGame
                 effect.Run(enemy);
             }
             enemy.Health -= (int)enemy.TempDamage;
+
             FighterInfoHelper.AttackMessage(fighter, enemy, (int)enemy.TempDamage);
             enemy.TempDamage = 0;
         }
@@ -38,7 +39,7 @@ namespace MyMiniGame
             fighter.Ability.Use(fighter, enemy);
             if(fighter.Ability.IsAttack)
             {
-                var effects = fighter.GetEffects().FindAll(x => x.IsAttackOrDeffence == true && x.IsActiveOrPassive == false);
+                var effects = fighter.GetEffects().FindAll(x => x.IsAttackOrDeffence == true && x.IsActiveOrPassive == false && x.IsPositiveOrNegative == true);
                 foreach (var effect in effects)
                 {
                     effect.Run(enemy);
@@ -52,16 +53,16 @@ namespace MyMiniGame
         /// <param name="FighterTwo">Защищающийся</param>
         public static void Effects(BaseFighter fighter, BaseFighter enemy)
         {
-            var posEffects = fighter.GetEffects().FindAll(x => x.IsPositiveOrNegative == true && x.IsActiveOrPassive == false);
+            var posEffects = fighter.GetEffects().FindAll(x => x.IsPositiveOrNegative == true && x.IsActiveOrPassive == false && x.IsAttackOrDeffence == false);
             RunEffects(posEffects, fighter);
 
-            var negEffects = fighter.GetEffects().FindAll(x => x.IsPositiveOrNegative == false && x.IsActiveOrPassive == false);
+            var negEffects = fighter.GetEffects().FindAll(x => x.IsPositiveOrNegative == false && x.IsActiveOrPassive == false && x.IsAttackOrDeffence == false);
             RunEffects(negEffects, fighter);
 
-            posEffects = enemy.GetEffects().FindAll(x => x.IsPositiveOrNegative == true && x.IsActiveOrPassive == false);
+            posEffects = enemy.GetEffects().FindAll(x => x.IsPositiveOrNegative == true && x.IsActiveOrPassive == false && x.IsAttackOrDeffence == false);
             RunEffects(posEffects, enemy);
 
-            negEffects = enemy.GetEffects().FindAll(x => x.IsPositiveOrNegative == false && x.IsActiveOrPassive == false);
+            negEffects = enemy.GetEffects().FindAll(x => x.IsPositiveOrNegative == false && x.IsActiveOrPassive == false && x.IsAttackOrDeffence == false);
             RunEffects(negEffects, enemy);
         }
         /// <summary>
