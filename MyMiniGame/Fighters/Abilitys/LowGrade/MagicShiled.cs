@@ -3,13 +3,14 @@ using MyMiniGame.Fighters.Classes;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using MyMiniGame.Fighters.Effects;
 
 namespace MyMiniGame.Fighters.Abilitys
 {
     class MagicShiled : IAbility
     {
         public List<EnumClasses> IdClass => new List<EnumClasses>(new EnumClasses[] {EnumClasses.Paladin});
-        public string FullInfo => "Магический щит, дающий защиту при следующем ударе";
+        public string FullInfo => "Магический щит, дающий защиту при следующем ударе и восстанавливающий не много здоровья";
 
         public int Cost => 20;
 
@@ -19,8 +20,8 @@ namespace MyMiniGame.Fighters.Abilitys
 
         public void Use(BaseFighter fighter, BaseFighter enemy)
         {
-            //TODO: Реализовать Абилку для MagicShiled
-            throw new NotImplementedException();
+            fighter.Health += fighter.Strength * 10;
+            fighter.AddEffect(new Shield());
         }
     }
 }

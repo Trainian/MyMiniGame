@@ -3,6 +3,7 @@ using MyMiniGame.Fighters.Effects;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using MyMiniGame.Fighters;
 using static MyMiniGame.Messager;
 
 namespace MyMiniGame.Menus
@@ -10,7 +11,7 @@ namespace MyMiniGame.Menus
     public class FightMenu
     {
         private BaseFighter _fighter;
-        private BaseFighter _enemie;
+        private BaseFighter _enemy;
         private bool battleEnd = false;
 
         public FightMenu(BaseFighter fighter)
@@ -19,33 +20,50 @@ namespace MyMiniGame.Menus
             _enemie = EnemyCreater.CreateEnemy(_fighter.Level);
             _enemie.Color = ConsoleColor.Red;
         }
+
         public void StartAtack()
         {
             Console.Clear();
-            FighterInfoHelper.fightersNormalInfo(_fighter, _enemie);
+            FighterInfoHelper.fightersNormalInfo(_fighter, _enemy);
 
             do
             {
                 ChooseAttack();
-
-                if (_fighter.Health <= 0 || _enemie.Health <= 0)
+                if (_fighter.Health <= 0 || _enemy.Health <= 0)
                     battleEnd = true;
 
-                //TODO: Атака противника
+                EnemyAttack.Attack(_fighter,_enemy);
+                if (_fighter.Health <= 0 || _enemy.Health <= 0)
+                    battleEnd = true;
 
-                Battle.Effects(_enemie, _fighter);
+                Battle.Effects(_enemy, _fighter);
+                if (_fighter.Health <= 0 || _enemy.Health <= 0)
+                    battleEnd = true;
+
+                String str = new String('-', 40);
+                Console.WriteLine(str);
+                FighterInfoHelper.fightersNormalInfo(_fighter, _enemy);
             } while (!battleEnd);
 
 
-            if(_fighter.Health <= 0 && _enemie.Health <= 0)
+            if(_fighter.Health <= 0 && _enemy.Health <= 0)
                 Console.WriteLine("Ничья");
             else if (_fighter.Health <= 0)
                 Console.WriteLine("Вы умерли");
             else
+            {
                 Console.WriteLine("Вы победили !");
+
+                //Опыт за бой
+                ExpUp.ExpSet(_fighter, _enemy.Level);
+            }
             Console.WriteLine("\n\nДля продолжения, нажмите любую кнопку...");
             Console.ReadKey();
+            
+            //Возвращаем Жизни и Ману в норму
+            _fighter.SetParametersToNormalize();
         }
+
         private void ChooseAttack ()
         {
             string strCh;
@@ -59,17 +77,16 @@ namespace MyMiniGame.Menus
                 if (int.TryParse(strCh, out ch))
                 {
                     Console.Clear();
-                    FighterInfoHelper.fightersNormalInfo(_fighter, _enemie);
                     switch (ch)
                     {
                         case 1:
-                            _fighter.BaseAttack(_enemie);
+                            _fighter.BaseAttack(_enemy);
                             attackUsed = true;
                             break;
                         case 2:
-                            if(_fighter.Mana > _fighter.Ability.Cost)
+                            if(_fighter.Mana >= _fighter.Ability.Cost)
                             {
-                                _fighter.SuperAbility(_enemie);
+                                _fighter.SuperAbility(_enemy);
                                 attackUsed = true;
                             }
                             else

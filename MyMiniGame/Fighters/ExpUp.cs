@@ -5,31 +5,23 @@ using System.Text;
 
 namespace MyMiniGame.Fighters
 {
-    //TODO: Реализовать возможность роста уровня
-    public static class LevelChange
+    /// <summary>
+    /// Получение опыта
+    /// </summary>
+    public static class ExpUp
     {
         /// <summary>
-        /// Добавляем или отнимаем Опыт
+        /// Добавляем опыт
         /// </summary>
         /// <param name="fighter">Боец</param>
         /// <param name="enemyLvl">Уровень противника</param>
         /// <param name="Win">Победил = True, Проиграл = False</param>
-        public static void ExpSet (BaseFighter fighter, uint enemyLvl, bool Win)
+        public static void ExpSet (BaseFighter fighter, uint enemyLvl)
         {
             var rnd = new Random(DateTime.Now.GetHashCode());
 
-            if(Win)
-            {
-                fighter.Exp += enemyLvl * (uint)rnd.Next(200, 500);
-                LevelSet(fighter);
-            }
-            else
-            {
-                fighter.Exp -= enemyLvl * (uint)rnd.Next(1, 3);
-                // Проверяем на отрицательное значение опыта (в случае проигрыша) и не даём упасть ниже 0
-                if (fighter.Exp < 0)
-                    fighter.Exp = 0;
-            }
+            fighter.Exp += enemyLvl * (uint)rnd.Next(20, 25);
+            LevelSet(fighter);
         }
         /// <summary>
         /// Проверяем на возможность повышения уровня

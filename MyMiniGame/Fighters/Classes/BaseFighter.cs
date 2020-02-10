@@ -47,7 +47,7 @@ namespace MyMiniGame.Fighters.Classes
         /// </summary>
         public abstract int Agility { get; set; }
         /// <summary>
-        /// Интеллект, увеличивает силу Спецспособности и колличествово Маны
+        /// Интеллект, увеличивает силу Спецспособности и количество Маны
         /// </summary>
         public abstract int Intellegence { get; set; }
         /// <summary>
@@ -113,10 +113,18 @@ namespace MyMiniGame.Fighters.Classes
         public BaseFighter(string name)
         {
             Name = name;
-            Health = Strength * 100;
-            Mana = Intellegence * 100;
-            _effects = new List<IEffect>();
             Level = 1;
+            SetParametersToNormalize();
+        }
+
+        /// <summary>
+        /// Установить/Восстановить Жизни и Ману, а так же сбрасываем эффекты
+        /// </summary>
+        public void SetParametersToNormalize ()
+        {
+            Health = Strength * 100;
+            Mana = Intellegence * 20;
+            _effects = new List<IEffect>();
         }
     }
 }

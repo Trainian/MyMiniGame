@@ -22,7 +22,7 @@ namespace MyMiniGame.Fighters.Abilitys
 
         public void Use(BaseFighter fighter, BaseFighter enemy)
         {
-            int hlth = (int)(fighter.Intellegence * 0.25);
+            int hlth = (int)(fighter.Intellegence * 15);
             fighter.Mana -= Cost;
             Console.WriteLine($"---> {fighter.Name} лечится на {hlth}! <---");
             fighter.Health += hlth;
