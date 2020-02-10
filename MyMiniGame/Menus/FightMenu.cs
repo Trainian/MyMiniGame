@@ -12,17 +12,17 @@ namespace MyMiniGame.Menus
         private BaseFighter _fighter;
         private BaseFighter _enemie;
         private bool battleEnd = false;
+
         public FightMenu(BaseFighter fighter)
         {
             _fighter = fighter;
-            _enemie = new Thief("enemie");
+            _enemie = EnemyCreater.CreateEnemy(_fighter.Level);
             _enemie.Color = ConsoleColor.Red;
         }
         public void StartAtack()
         {
             Console.Clear();
             FighterInfoHelper.fightersNormalInfo(_fighter, _enemie);
-
 
             do
             {

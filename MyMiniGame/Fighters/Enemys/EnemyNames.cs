@@ -4,7 +4,7 @@ using System.Text;
 
 namespace MyMiniGame.Fighters.Enemys
 {
-    enum EnemyNames
+    enum EnumNames
     {
         Humen,
         Runic,

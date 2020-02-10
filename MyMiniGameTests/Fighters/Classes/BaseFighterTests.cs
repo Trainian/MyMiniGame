@@ -25,6 +25,7 @@ namespace MyMiniGame.Fighters.Classes.Tests
             fighter.AddEffect(new Bleeding());
             fighterTest.AddEffect(new Bleeding());
 
+            fighterTest.Ability.Use(fighterTest,fighter);
             fighterTest.AddEffect(new Bleeding());
 
             Assert.AreEqual(fighter.GetEffects().Count, fighter.GetEffects().Count);

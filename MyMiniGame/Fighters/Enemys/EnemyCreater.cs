@@ -18,7 +18,7 @@ namespace MyMiniGame
             Random rnd = new Random();
             BaseFighter fighter;
             int ch = 1;
-            string name = Enum.GetName(typeof(EnemyNames),ch);            
+            string name = Enum.GetName(typeof(EnumNames),ch);
             ch = rnd.Next(1, Enum.GetNames(typeof(EnumClasses)).Length);
 
             fighter = ch switch
@@ -28,8 +28,7 @@ namespace MyMiniGame
                 3 => new Mag(name),
                 4 => new Priest(name),
                 5 => new Archer(name),
-                6 => new Thief(name),
-                _ => throw new Exception("Хакер, что ли ?"),
+                6 => new Thief(name)
             };
 
             return fighter;

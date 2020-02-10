@@ -13,13 +13,14 @@ namespace MyMiniGame.Menus
     {
         public void Start (BaseFighter fighter)
         {
+            BaseFighter bfighter = fighter;
             string strCh;
             int ch;
 
             do
             {
                 Console.Clear();
-                Console.WriteLine($"Добро пожаловать, {fighter.Name}");
+                Console.WriteLine($"Добро пожаловать, {bfighter.Name}");
                 Console.WriteLine("Что будем делать ?");
                 Console.WriteLine("1 - Найти противника\n2 - Повысить уровень\n3 - Магазин\n4 - Информация о герое\n5 - Выход в меню");
                 strCh = Console.ReadLine();
@@ -28,7 +29,7 @@ namespace MyMiniGame.Menus
                     switch(ch)
                     {
                         case 1:
-                            var fm = new FightMenu(fighter);
+                            var fm = new FightMenu(bfighter);
                             fm.StartAtack();
                             break;
                         case 2:
@@ -43,6 +44,7 @@ namespace MyMiniGame.Menus
                             Console.ReadLine();
                             break;
                         case 5:
+                            //Выход в Главное меню
                             break;
                         default:
                             break;

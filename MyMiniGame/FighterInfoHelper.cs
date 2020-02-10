@@ -43,7 +43,8 @@ namespace MyMiniGame
         {
             var effects = fighter.GetEffects();
             Console.ForegroundColor = fighter.Color;
-            Console.WriteLine($"Fighter {fighter.Name}, Health: {fighter.Health}, Mana:{fighter.Mana}");
+            Console.WriteLine($"Fighter {fighter.Name}, Class: {fighter.Class}, Ability: {fighter.Ability.Name}");
+            Console.WriteLine($"Health: {fighter.Health}, Mana:{fighter.Mana}");
             Console.Write("Эффекты: ");
             foreach (var item in effects)
             {
