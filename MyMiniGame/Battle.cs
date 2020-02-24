@@ -10,11 +10,38 @@ namespace MyMiniGame
     static class Battle
     {
         /// <summary>
+        /// Старт атаки
+        /// </summary>
+        /// <param name="fighter">Атакующий</param>
+        /// <param name="enemy">Защитник</param>
+        /// <param name="i">1 - Обычная атака, 2 - Магическая атака</param>
+        /// <returns>true - Смерть одного из бойцов</returns>
+        public static bool StartAttack(this BaseFighter fighter, BaseFighter enemy, int ch)
+        {
+            fighter.Effects();
+            if (IsDeath(fighter))
+                return true;
+
+            switch (ch)
+            {
+                case 1:
+                    fighter.BaseAttack(enemy);
+                    break;
+                case 2:
+                    fighter.SuperAbility(enemy);
+                    break;
+            }
+            if (IsDeath(enemy))
+                return true;
+
+            else return false;
+        }
+        /// <summary>
         /// Обычная такая
         /// </summary>
         /// <param name="fighterOne">Атакующий</param>
         /// <param name="fighterTwo">Защищающийся</param>
-        public static void BaseAttack(this BaseFighter fighter, BaseFighter enemy)
+        private static void BaseAttack(this BaseFighter fighter, BaseFighter enemy)
         {
             //TODO: По думать по поводу того что бы убрать временные переменные в бойцах
             enemy.TempDamage += (uint)((fighter.Strength * 10) - enemy.Defence);
@@ -34,7 +61,7 @@ namespace MyMiniGame
         /// </summary>
         /// <param name="fighterOne">Атакующий</param>
         /// <param name="fighterTwo">Защищающийся</param>
-        public static void SuperAbility(this BaseFighter fighter, BaseFighter enemy)
+        private static void SuperAbility(this BaseFighter fighter, BaseFighter enemy)
         {
             fighter.Ability.Use(fighter, enemy);
             if(fighter.Ability.IsAttack)
@@ -51,26 +78,20 @@ namespace MyMiniGame
         /// </summary>
         /// <param name="fighterOne">Атакующий</param>
         /// <param name="FighterTwo">Защищающийся</param>
-        public static void Effects(BaseFighter fighter, BaseFighter enemy)
+        public static void Effects(this BaseFighter fighter)
         {
             var posEffects = fighter.GetEffects().FindAll(x => x.IsPositiveOrNegative == true && x.IsActiveOrPassive == false && x.IsAttackOrDeffence == false);
             RunEffects(posEffects, fighter);
 
             var negEffects = fighter.GetEffects().FindAll(x => x.IsPositiveOrNegative == false && x.IsActiveOrPassive == false && x.IsAttackOrDeffence == false);
             RunEffects(negEffects, fighter);
-
-            posEffects = enemy.GetEffects().FindAll(x => x.IsPositiveOrNegative == true && x.IsActiveOrPassive == false && x.IsAttackOrDeffence == false);
-            RunEffects(posEffects, enemy);
-
-            negEffects = enemy.GetEffects().FindAll(x => x.IsPositiveOrNegative == false && x.IsActiveOrPassive == false && x.IsAttackOrDeffence == false);
-            RunEffects(negEffects, enemy);
         }
         /// <summary>
         /// Выполняет эффекты и удаляет уже завершившиеся
         /// </summary>
         /// <param name="effects">Лист эффектов для выполнения, Негативные или Положительные</param>
         /// <param name="fighter">Боей, чьи эффекты будут запускаться</param>
-        public static void RunEffects (List<IEffect> effects, BaseFighter fighter)
+        private static void RunEffects (List<IEffect> effects, BaseFighter fighter)
         {
             foreach (var effect in effects)
             {
@@ -78,6 +99,11 @@ namespace MyMiniGame
                 if (effect.Ticks <= 0)
                     fighter.RemoveEffect(effect);
             }
+        }
+
+        private static bool IsDeath(BaseFighter fighter)
+        {
+            return fighter.Health <= 0;
         }
     }
 }

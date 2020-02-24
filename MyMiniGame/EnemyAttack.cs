@@ -22,10 +22,10 @@ namespace MyMiniGame
             _numberAttack++;
             if (_numberAttack % 4 == 0 && enemy.Mana >= enemy.Ability.Cost)
             {
-                enemy.SuperAbility(fighter);
+                fighter.StartAttack(enemy, 2);
             }
             else
-                enemy.BaseAttack(fighter);
+                fighter.StartAttack(enemy, 1);
         }
     }
 }

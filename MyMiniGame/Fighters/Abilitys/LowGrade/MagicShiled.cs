@@ -20,7 +20,9 @@ namespace MyMiniGame.Fighters.Abilitys
 
         public void Use(BaseFighter fighter, BaseFighter enemy)
         {
-            fighter.Health += fighter.Strength * 10;
+            int hlth = fighter.Strength * 10;
+            fighter.Health += hlth;
+            Console.WriteLine($"{fighter.Name} лечится на {hlth}");
             fighter.AddEffect(new Shield());
         }
     }

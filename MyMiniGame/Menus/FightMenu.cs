@@ -17,8 +17,8 @@ namespace MyMiniGame.Menus
         public FightMenu(BaseFighter fighter)
         {
             _fighter = fighter;
-            _enemie = EnemyCreater.CreateEnemy(_fighter.Level);
-            _enemie.Color = ConsoleColor.Red;
+            _enemy = EnemyCreater.CreateEnemy(_fighter.Level);
+            _enemy.Color = ConsoleColor.Red;
         }
 
         public void StartAtack()
@@ -32,13 +32,11 @@ namespace MyMiniGame.Menus
                 if (_fighter.Health <= 0 || _enemy.Health <= 0)
                     battleEnd = true;
 
-                EnemyAttack.Attack(_fighter,_enemy);
+                _enemy.Effects();
+                EnemyAttack.Attack(_enemy,_fighter);
                 if (_fighter.Health <= 0 || _enemy.Health <= 0)
                     battleEnd = true;
 
-                Battle.Effects(_enemy, _fighter);
-                if (_fighter.Health <= 0 || _enemy.Health <= 0)
-                    battleEnd = true;
 
                 String str = new String('-', 40);
                 Console.WriteLine(str);
@@ -57,6 +55,7 @@ namespace MyMiniGame.Menus
                 //Опыт за бой
                 ExpUp.ExpSet(_fighter, _enemy.Level);
             }
+
             Console.WriteLine("\n\nДля продолжения, нажмите любую кнопку...");
             Console.ReadKey();
             
@@ -80,13 +79,13 @@ namespace MyMiniGame.Menus
                     switch (ch)
                     {
                         case 1:
-                            _fighter.BaseAttack(_enemy);
+                            _fighter.StartAttack(_enemy, 1);
                             attackUsed = true;
                             break;
                         case 2:
                             if(_fighter.Mana >= _fighter.Ability.Cost)
                             {
-                                _fighter.SuperAbility(_enemy);
+                                _fighter.StartAttack(_enemy, 2);
                                 attackUsed = true;
                             }
                             else
