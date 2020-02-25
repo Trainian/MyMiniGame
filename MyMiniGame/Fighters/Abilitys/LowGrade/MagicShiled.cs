@@ -22,7 +22,9 @@ namespace MyMiniGame.Fighters.Abilitys
         {
             int hlth = fighter.Strength * 10;
             fighter.Health += hlth;
+            Console.ForegroundColor = fighter.Color;
             Console.WriteLine($"{fighter.Name} лечится на {hlth}");
+            Console.ForegroundColor = ConsoleColor.White;
             fighter.AddEffect(new Shield());
         }
     }

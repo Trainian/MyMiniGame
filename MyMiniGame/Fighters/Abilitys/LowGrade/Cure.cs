@@ -24,7 +24,9 @@ namespace MyMiniGame.Fighters.Abilitys
         {
             int hlth = (int)(fighter.Intellegence * 15);
             fighter.Mana -= Cost;
+            Console.ForegroundColor = fighter.Color;
             Console.WriteLine($"---> {fighter.Name} лечится на {hlth}! <---");
+            Console.ForegroundColor = ConsoleColor.White;
             fighter.Health += hlth;
         }
     }

@@ -70,11 +70,5 @@ namespace MyMiniGame
             Console.WriteLine();
             Console.ForegroundColor = ConsoleColor.White;
         }
-        internal static void changeFighters<T> (ref T fighterOne, ref T fighterTwo)
-        {
-            var temp = fighterOne;
-            fighterOne = fighterTwo;
-            fighterTwo = temp;
-        }
     }
 }

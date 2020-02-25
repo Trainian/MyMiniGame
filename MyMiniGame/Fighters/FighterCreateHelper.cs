@@ -34,12 +34,8 @@ namespace MyMiniGame
                 _ => throw new Exception("Хакер, что ли ?"),
             };
             fighter.Color = ConsoleColor.Green;
+            fighter.LvlUp = 5;
             return fighter;
-        }
-        public static void FighterCreateRandom(this BaseFighter fighter, int lvl)
-        {
-            //TODO: Реализовать создание случайного Бойца
-            throw new NotImplementedException("Необходимо реализовать перед использованием");
         }
     }
 }

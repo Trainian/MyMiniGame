@@ -30,6 +30,8 @@ namespace MyMiniGame
                 case 2:
                     fighter.SuperAbility(enemy);
                     break;
+                default:
+                    throw new NullReferenceException("Ошибка выбора атаки");
             }
             if (IsDeath(enemy))
                 return true;
