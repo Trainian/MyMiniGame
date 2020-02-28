@@ -1,12 +1,11 @@
-﻿using MyMiniGame.Fighters.Abilitys.Interfaces;
-using MyMiniGame.Fighters.Classes;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using MyMiniGame.Fighters.Abilitys.Interfaces;
+using MyMiniGame.Fighters.Classes;
 
-namespace MyMiniGame.Fighters.Abilitys
+namespace MyMiniGame.Fighters.Abilitys.LowGrade
 {
-    class SwordSlash : IAbility
+    public struct SwordSlash : IAbility
     {
         public List<EnumClasses> IdClass => new List<EnumClasses>(new EnumClasses[] {EnumClasses.Warrior});
         public string FullInfo => "Рассекающий удар, способный пробить броню";

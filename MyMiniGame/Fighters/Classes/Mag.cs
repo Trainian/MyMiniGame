@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using MyMiniGame.Fighters.Abilitys;
+using MyMiniGame.Fighters.Abilitys.LowGrade;
 
 namespace MyMiniGame.Fighters.Classes
 {

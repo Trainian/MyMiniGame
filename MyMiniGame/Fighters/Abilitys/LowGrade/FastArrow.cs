@@ -1,12 +1,11 @@
-﻿using MyMiniGame.Fighters.Abilitys.Interfaces;
-using MyMiniGame.Fighters.Classes;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using MyMiniGame.Fighters.Abilitys.Interfaces;
+using MyMiniGame.Fighters.Classes;
 
-namespace MyMiniGame.Fighters.Abilitys
+namespace MyMiniGame.Fighters.Abilitys.LowGrade
 {
-    class FastArrow : IAbility
+    public struct FastArrow : IAbility
     {
         public List<EnumClasses> IdClass => new List<EnumClasses>(new EnumClasses[] {EnumClasses.Archer });
         public string FullInfo => "Быстрая и сильная стрела, наносящий большой урон";

@@ -1,9 +1,7 @@
-﻿using MyMiniGame.Fighters.Classes;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System;
+using MyMiniGame.Fighters.Classes;
 
-namespace MyMiniGame
+namespace MyMiniGame.Fighters
 {
     public static class FighterCreateHelper
     {

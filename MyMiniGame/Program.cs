@@ -1,12 +1,5 @@
-﻿using MyMiniGame.Fighters;
-using MyMiniGame.Fighters.Abilitys;
-using MyMiniGame.Fighters.Classes;
-using MyMiniGame.Fighters.Abilitys.Interfaces;
-using System;
-using System.Text;
+﻿using MyMiniGame.Menus;
 using static MyMiniGame.Messager;
-using MyMiniGame.Fighters.Effects;
-using MyMiniGame.Menus;
 
 namespace MyMiniGame
 {

@@ -4,6 +4,7 @@ using MyMiniGame.Fighters.Classes;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using MyMiniGame.Fighters.Enemys;
 
 namespace MyMiniGame.Tests
 {

@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using MyMiniGame.Fighters.Abilitys.Interfaces;
 using MyMiniGame.Fighters.Classes;
 using MyMiniGame.Fighters.Effects;
-using static MyMiniGame.Messager;
 
-namespace MyMiniGame.Fighters.Abilitys
+namespace MyMiniGame.Fighters.Abilitys.LowGrade
 {
-    class BloodBlade : IAbility
+    public struct BloodBlade : IAbility
     {
         public List<EnumClasses> IdClass => new List<EnumClasses>(new EnumClasses[]{EnumClasses.Thief});
 

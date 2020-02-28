@@ -1,11 +1,7 @@
-﻿using MyMiniGame.Fighters.Classes;
-using MyMiniGame.Fighters.Enemys;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using MyMiniGame.Fighters;
+﻿using System;
+using MyMiniGame.Fighters.Classes;
 
-namespace MyMiniGame
+namespace MyMiniGame.Fighters.Enemys
 {
     public static class EnemyCreater
     {
@@ -35,7 +31,8 @@ namespace MyMiniGame
                 3 => new Mag(name),
                 4 => new Priest(name),
                 5 => new Archer(name),
-                6 => new Thief(name)
+                6 => new Thief(name),
+                _ => throw new NullReferenceException()
             };
 
             fighter.Level = (byte)lvl;

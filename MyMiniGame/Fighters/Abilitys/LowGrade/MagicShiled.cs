@@ -1,13 +1,12 @@
-﻿using MyMiniGame.Fighters.Abilitys.Interfaces;
-using MyMiniGame.Fighters.Classes;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using MyMiniGame.Fighters.Abilitys.Interfaces;
+using MyMiniGame.Fighters.Classes;
 using MyMiniGame.Fighters.Effects;
 
-namespace MyMiniGame.Fighters.Abilitys
+namespace MyMiniGame.Fighters.Abilitys.LowGrade
 {
-    class MagicShiled : IAbility
+    public struct MagicShiled : IAbility
     {
         public List<EnumClasses> IdClass => new List<EnumClasses>(new EnumClasses[] {EnumClasses.Paladin});
         public string FullInfo => "Магический щит, дающий защиту при следующем ударе и восстанавливающий не много здоровья";

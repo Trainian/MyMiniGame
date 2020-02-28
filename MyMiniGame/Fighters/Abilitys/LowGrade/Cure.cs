@@ -1,13 +1,9 @@
-﻿using MyMiniGame.Fighters.Abilitys.Interfaces;
-using System;
-using System.Collections;
+﻿using System;
 using System.Collections.Generic;
-using System.Text;
-using static MyMiniGame.Program;
-using static MyMiniGame.Messager;
+using MyMiniGame.Fighters.Abilitys.Interfaces;
 using MyMiniGame.Fighters.Classes;
 
-namespace MyMiniGame.Fighters.Abilitys
+namespace MyMiniGame.Fighters.Abilitys.LowGrade
 {
     public struct Cure : IAbility
     {

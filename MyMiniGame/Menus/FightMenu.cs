@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using MyMiniGame.Fighters;
+using MyMiniGame.Fighters.Enemys;
 using static MyMiniGame.Messager;
 
 namespace MyMiniGame.Menus
