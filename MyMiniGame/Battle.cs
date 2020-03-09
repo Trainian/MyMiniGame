@@ -3,6 +3,7 @@ using MyMiniGame.Fighters.Effects.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using MyMiniGame.Menus;
 using static MyMiniGame.Messager;
 
 namespace MyMiniGame
@@ -14,20 +15,20 @@ namespace MyMiniGame
         /// </summary>
         /// <param name="fighter">Атакующий</param>
         /// <param name="enemy">Защитник</param>
-        /// <param name="i">1 - Обычная атака, 2 - Магическая атака</param>
+        /// <param name="choise">Выбор атакаи, обычная или магичская</param>
         /// <returns>true - Смерть одного из бойцов</returns>
-        public static bool StartAttack(this BaseFighter fighter, BaseFighter enemy, int ch)
+        public static bool StartAttack(this BaseFighter fighter, BaseFighter enemy, EnumAttackChoise choice)
         {
             fighter.Effects();
             if (IsDeath(fighter))
                 return true;
 
-            switch (ch)
+            switch (choice)
             {
-                case 1:
+                case EnumAttackChoise.BaseAttack:
                     fighter.BaseAttack(enemy);
                     break;
-                case 2:
+                case EnumAttackChoise.MagicAttack:
                     fighter.SuperAbility(enemy);
                     break;
                 default:
@@ -38,6 +39,8 @@ namespace MyMiniGame
 
             else return false;
         }
+
+
         /// <summary>
         /// Обычная такая
         /// </summary>
@@ -58,6 +61,8 @@ namespace MyMiniGame
             FighterInfoHelper.AttackMessage(fighter, enemy, (int)enemy.TempDamage);
             enemy.TempDamage = 0;
         }
+
+
         /// <summary>
         /// Использование супер-способностей
         /// </summary>
@@ -75,6 +80,8 @@ namespace MyMiniGame
                 }
             }
         }
+
+
         /// <summary>
         /// Подсчет атаки или защиты Положительных и Отриацательных эффектов.
         /// </summary>
@@ -88,6 +95,8 @@ namespace MyMiniGame
             var negEffects = fighter.GetEffects().FindAll(x => x.IsPositiveOrNegative == false && x.IsActiveOrPassive == false && x.IsAttackOrDeffence == false);
             RunEffects(negEffects, fighter);
         }
+
+
         /// <summary>
         /// Выполняет эффекты и удаляет уже завершившиеся
         /// </summary>
@@ -102,6 +111,7 @@ namespace MyMiniGame
                     fighter.RemoveEffect(effect);
             }
         }
+
 
         private static bool IsDeath(BaseFighter fighter)
         {

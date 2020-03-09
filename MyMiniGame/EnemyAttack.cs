@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using System.Text;
 using MyMiniGame.Fighters.Classes;
+using MyMiniGame.Menus;
 
 namespace MyMiniGame
 {
     /// <summary>
-    /// Класс для формирования атаки противника (компьютера)
+    /// Класс для формирования атаки противника (компъютера)
     /// </summary>
     public static class EnemyAttack
     {
@@ -22,10 +23,10 @@ namespace MyMiniGame
             _numberAttack++;
             if (_numberAttack % 4 == 0 && enemy.Mana >= enemy.Ability.Cost)
             {
-                fighter.StartAttack(enemy, 2);
+                fighter.StartAttack(enemy, EnumAttackChoise.MagicAttack);
             }
             else
-                fighter.StartAttack(enemy, 1);
+                fighter.StartAttack(enemy, EnumAttackChoise.BaseAttack);
         }
     }
 }

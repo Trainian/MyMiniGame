@@ -31,7 +31,7 @@ namespace MyMiniGame.Menus
                     {
                         case 1:
                             var fm = new FightMenu(bfighter);
-                            fm.StartAtack();
+                            fm.StartAttack();
                             break;
                         case 2:
                             LevelUp.Menu(fighter);

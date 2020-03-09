@@ -13,7 +13,7 @@ namespace MyMiniGame.Menus
     {
         private BaseFighter _fighter;
         private BaseFighter _enemy;
-        private bool battleEnd = false;
+        private bool _battleEnd = false;
 
         public FightMenu(BaseFighter fighter)
         {
@@ -22,7 +22,7 @@ namespace MyMiniGame.Menus
             _enemy.Color = ConsoleColor.Red;
         }
 
-        public void StartAtack()
+        public void StartAttack()
         {
             Console.Clear();
             FighterInfoHelper.fightersNormalInfo(_fighter, _enemy);
@@ -31,21 +31,30 @@ namespace MyMiniGame.Menus
             {
                 ChooseAttack();
                 if (_fighter.Health <= 0 || _enemy.Health <= 0)
-                    battleEnd = true;
+                    _battleEnd = true;
 
                 _enemy.Effects();
+
                 EnemyAttack.Attack(_enemy,_fighter);
                 if (_fighter.Health <= 0 || _enemy.Health <= 0)
-                    battleEnd = true;
-
+                    _battleEnd = true;
 
                 String str = new String('-', 40);
                 Console.WriteLine(str);
                 FighterInfoHelper.fightersNormalInfo(_fighter, _enemy);
-            } while (!battleEnd);
+            } while (!_battleEnd);
 
+            WhoWinner();
 
-            if(_fighter.Health <= 0 && _enemy.Health <= 0)
+            Console.WriteLine("\n\nДля продолжения, нажмите любую кнопку...");
+            Console.ReadKey();
+            //Возвращаем Жизни и Ману в норму
+            _fighter.SetParametersToNormalize();
+        }
+
+        private void WhoWinner()
+        {
+            if (_fighter.Health <= 0 && _enemy.Health <= 0)
                 Console.WriteLine("Ничья");
             else if (_fighter.Health <= 0)
                 Console.WriteLine("Вы умерли");
@@ -56,12 +65,6 @@ namespace MyMiniGame.Menus
                 //Опыт за бой
                 ExpUp.ExpSet(_fighter, _enemy.Level);
             }
-
-            Console.WriteLine("\n\nДля продолжения, нажмите любую кнопку...");
-            Console.ReadKey();
-            
-            //Возвращаем Жизни и Ману в норму
-            _fighter.SetParametersToNormalize();
         }
 
         private void ChooseAttack ()
@@ -80,13 +83,13 @@ namespace MyMiniGame.Menus
                     switch (ch)
                     {
                         case 1:
-                            _fighter.StartAttack(_enemy, 1);
+                            _fighter.StartAttack(_enemy, EnumAttackChoise.BaseAttack);
                             attackUsed = true;
                             break;
                         case 2:
                             if(_fighter.Mana >= _fighter.Ability.Cost)
                             {
-                                _fighter.StartAttack(_enemy, 2);
+                                _fighter.StartAttack(_enemy, EnumAttackChoise.MagicAttack);
                                 attackUsed = true;
                             }
                             else
