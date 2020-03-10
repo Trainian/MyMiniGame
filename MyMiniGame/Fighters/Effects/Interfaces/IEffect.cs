@@ -40,6 +40,7 @@ namespace MyMiniGame.Fighters.Effects.Interfaces
         /// <summary>
         /// Действие эффекта
         /// </summary>
-        void Run(BaseFighter fighter);
+        int Run(BaseFighter fighter);
+        int Run(BaseFighter fighter, int dmg);
     }
 }

@@ -13,7 +13,7 @@ namespace MyMiniGame.Menus
     {
         private BaseFighter _fighter;
         private BaseFighter _enemy;
-        private bool _battleEnd = false;
+        private bool _battleEnd;
 
         public FightMenu(BaseFighter fighter)
         {
@@ -29,12 +29,14 @@ namespace MyMiniGame.Menus
 
             do
             {
+                _fighter.EffectsNegative();
+                _fighter.EffectsPositive();
                 ChooseAttack();
                 if (_fighter.Health <= 0 || _enemy.Health <= 0)
                     _battleEnd = true;
 
-                _enemy.Effects();
-
+                _enemy.EffectsNegative();
+                _enemy.EffectsPositive();
                 EnemyAttack.Attack(_enemy,_fighter);
                 if (_fighter.Health <= 0 || _enemy.Health <= 0)
                     _battleEnd = true;
@@ -42,6 +44,7 @@ namespace MyMiniGame.Menus
                 String str = new String('-', 40);
                 Console.WriteLine(str);
                 FighterInfoHelper.fightersNormalInfo(_fighter, _enemy);
+
             } while (!_battleEnd);
 
             WhoWinner();

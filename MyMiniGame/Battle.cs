@@ -17,12 +17,8 @@ namespace MyMiniGame
         /// <param name="enemy">Защитник</param>
         /// <param name="choise">Выбор атакаи, обычная или магичская</param>
         /// <returns>true - Смерть одного из бойцов</returns>
-        public static bool StartAttack(this BaseFighter fighter, BaseFighter enemy, EnumAttackChoise choice)
+        public static void StartAttack(this BaseFighter fighter, BaseFighter enemy, EnumAttackChoise choice)
         {
-            fighter.Effects();
-            if (IsDeath(fighter))
-                return true;
-
             switch (choice)
             {
                 case EnumAttackChoise.BaseAttack:
@@ -34,10 +30,6 @@ namespace MyMiniGame
                 default:
                     throw new NullReferenceException("Ошибка выбора атаки");
             }
-            if (IsDeath(enemy))
-                return true;
-
-            else return false;
         }
 
 
@@ -48,15 +40,14 @@ namespace MyMiniGame
         /// <param name="fighterTwo">Защищающийся</param>
         private static void BaseAttack(this BaseFighter fighter, BaseFighter enemy)
         {
-            //TODO: По думать по поводу того что бы убрать временные переменные в бойцах
-            enemy.TempDamage += (uint)((fighter.Strength * 10) - enemy.Defence);
+            int damage = (fighter.Strength * 10) - enemy.Defence;
             //Находим все Атакующие\Активные эффекты и прибавляем к атаке
             var effects = fighter.GetEffects().FindAll(x => x.IsAttackOrDeffence == true && x.IsActiveOrPassive == false);
             foreach (var effect in effects)
             {
-                effect.Run(enemy);
+                damage = effect.Run(enemy,damage);
             }
-            enemy.Health -= (int)enemy.TempDamage;
+            enemy.Health -= damage;
 
             FighterInfoHelper.AttackMessage(fighter, enemy, (int)enemy.TempDamage);
             enemy.TempDamage = 0;
@@ -76,25 +67,33 @@ namespace MyMiniGame
                 var effects = fighter.GetEffects().FindAll(x => x.IsAttackOrDeffence == true && x.IsActiveOrPassive == false && x.IsPositiveOrNegative == true);
                 foreach (var effect in effects)
                 {
-                    effect.Run(enemy);
+                    effect.Run(enemy, 0);
                 }
             }
         }
 
 
         /// <summary>
-        /// Подсчет атаки или защиты Положительных и Отриацательных эффектов.
+        /// Запуск отрицательных эффектов
         /// </summary>
-        /// <param name="fighterOne">Атакующий</param>
-        /// <param name="FighterTwo">Защищающийся</param>
-        public static void Effects(this BaseFighter fighter)
+        /// <param name="fighter">Боец</param>
+        public static void EffectsNegative(this BaseFighter fighter)
         {
-            var posEffects = fighter.GetEffects().FindAll(x => x.IsPositiveOrNegative == true && x.IsActiveOrPassive == false && x.IsAttackOrDeffence == false);
-            RunEffects(posEffects, fighter);
-
-            var negEffects = fighter.GetEffects().FindAll(x => x.IsPositiveOrNegative == false && x.IsActiveOrPassive == false && x.IsAttackOrDeffence == false);
+            var negEffects = fighter?.GetEffects().FindAll(x => x.IsPositiveOrNegative == false && x.IsActiveOrPassive == false && x.IsAttackOrDeffence == false);
             RunEffects(negEffects, fighter);
         }
+
+
+        /// <summary>
+        /// Запуск положительных эффектов
+        /// </summary>
+        /// <param name="fighter">Боец</param>
+        public static void EffectsPositive(this BaseFighter fighter)
+        {
+            var posEffects = fighter?.GetEffects().FindAll(x => x.IsPositiveOrNegative == true && x.IsActiveOrPassive == false && x.IsAttackOrDeffence == false);
+            RunEffects(posEffects, fighter);
+        }
+
 
 
         /// <summary>
@@ -106,7 +105,7 @@ namespace MyMiniGame
         {
             foreach (var effect in effects)
             {
-                effect.Run(fighter);
+                effect.Run(fighter, 0);
                 if (effect.Ticks <= 0)
                     fighter.RemoveEffect(effect);
             }

@@ -20,11 +20,11 @@ namespace MyMiniGame.Fighters.Effects
         public bool IsAttackOrDeffence => true;
         public bool IsPositiveOrNegative => true;
         public bool IsActiveOrPassive => false;
-        public void Run(BaseFighter fighter)
+        public int Run(BaseFighter fighter, int dmg)
         {
-            fighter.TempDamage = (fighter.TempDamage / 100) * 90;
+            int damage = (int)(fighter.TempDamage / 100) * 90;
             Ticks--;
+            return damage;
         }
     }
 }
-//TODO: Не верно работает щит, урон того кто накладывал равен 0-ю, хотя должен уменьшать наносимый ему урон

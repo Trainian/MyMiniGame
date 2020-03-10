@@ -19,12 +19,19 @@ namespace MyMiniGame.Fighters.Effects
         public bool IsPositiveOrNegative => false;
         public bool IsActiveOrPassive => false;
         public sbyte Ticks { get; set; }
-        public void Run(BaseFighter fighter)
+        public int Run(BaseFighter fighter)
         {
-            int dmg = fighter.Health / 100 * 5;
-            fighter.Health -= dmg;
-            Console.WriteLine($"{fighter.Name} получает урон от кровотечения {dmg}");
+            
+        }
+
+        public int Run(BaseFighter fighter, int dmg)
+        {
+            int damage = fighter.Health / 100 * 5;
+            Console.ForegroundColor = fighter.Color;
+            Console.WriteLine($"{fighter.Name} получает урон от кровотечения ");
+            Console.ForegroundColor = ConsoleColor.White;
             Ticks--;
+            return damage;
         }
     }
 }

@@ -63,11 +63,6 @@ namespace MyMiniGame.Fighters.Classes
         /// </summary>
         public uint Money { get; set; }
         /// <summary>
-        /// Переменная для подсчета урона, наносится после прохождения
-        /// по всем эффектам в конце
-        /// </summary>
-        public uint TempDamage { get; set; } = 0;
-        /// <summary>
         /// Спецспособность
         /// Каждый класс может иметь только свои Способности
         /// </summary>
