@@ -48,7 +48,7 @@ namespace MyMiniGame.Menus
                             //Выход в Главное меню
                             break;
                         default:
-                            break;
+                            continue;
                     }
                 }
             } while (ch != 5);

@@ -22,7 +22,7 @@ namespace MyMiniGame.Fighters.Effects
         public bool IsActiveOrPassive => false;
         public int Run(BaseFighter fighter, int dmg)
         {
-            int damage = (int)(fighter.TempDamage / 100) * 90;
+            int damage = (int)(dmg / 100) * 90;
             Ticks--;
             return damage;
         }

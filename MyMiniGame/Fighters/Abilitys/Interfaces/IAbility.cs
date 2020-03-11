@@ -35,6 +35,6 @@ namespace MyMiniGame.Fighters.Abilitys.Interfaces
         /// </summary>
         /// <param name="fighter">Атакующий</param>
         /// <param name="enemy">Защищающийся</param>
-        void Use(BaseFighter fighter, BaseFighter enemy);
+        int Use(BaseFighter fighter, BaseFighter enemy);
     }
 }

@@ -16,7 +16,7 @@ namespace MyMiniGame.Fighters.Abilitys.LowGrade
 
         public bool IsAttack => true;
 
-        public void Use(BaseFighter fighter, BaseFighter enemy)
+        public int Use(BaseFighter fighter, BaseFighter enemy)
         {
             //TODO: Реализовать АБилку для FastArrow
             throw new NotImplementedException();

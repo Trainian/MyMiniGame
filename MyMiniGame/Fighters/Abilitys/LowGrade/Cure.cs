@@ -16,7 +16,7 @@ namespace MyMiniGame.Fighters.Abilitys.LowGrade
 
         public bool IsAttack => false;
 
-        public void Use(BaseFighter fighter, BaseFighter enemy)
+        public int Use(BaseFighter fighter, BaseFighter enemy)
         {
             int hlth = (int)(fighter.Intellegence * 15);
             fighter.Mana -= Cost;
@@ -24,6 +24,7 @@ namespace MyMiniGame.Fighters.Abilitys.LowGrade
             Console.WriteLine($"---> {fighter.Name} лечится на {hlth}! <---");
             Console.ForegroundColor = ConsoleColor.White;
             fighter.Health += hlth;
+            return 0;
         }
     }
 }

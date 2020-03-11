@@ -18,17 +18,16 @@ namespace MyMiniGame.Fighters.Abilitys.LowGrade
 
         public bool IsAttack => true;
 
-        public void Use(BaseFighter fighter, BaseFighter enemy)
+        public int Use(BaseFighter fighter, BaseFighter enemy)
         {
-            int dmg = ((fighter.Strength * 15) - enemy.Defence);
-            if (dmg < 0)
-                dmg = 0;
+            int damage = ((fighter.Strength * 15) - enemy.Defence);
+            if (damage < 0)
+                damage = 0;
 
-            enemy.TempDamage = (uint)dmg;
             fighter.Mana -= Cost;
             enemy.AddEffect(new Bleeding());
-            Console.WriteLine($"{fighter.Name} Использует BloodBLade и наносит: {enemy.TempDamage}");
-            enemy.Health -= (int)enemy.TempDamage;
+            Console.WriteLine($"{fighter.Name} Использует BloodBLade");
+            return damage;
         }
     }
 }

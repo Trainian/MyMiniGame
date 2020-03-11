@@ -19,10 +19,7 @@ namespace MyMiniGame.Fighters.Effects
         public bool IsPositiveOrNegative => false;
         public bool IsActiveOrPassive => false;
         public sbyte Ticks { get; set; }
-        public int Run(BaseFighter fighter)
-        {
-            
-        }
+
 
         public int Run(BaseFighter fighter, int dmg)
         {

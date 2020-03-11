@@ -78,7 +78,7 @@ namespace MyMiniGame.Menus
             do
             {
                 Console.WriteLine("Выбор атаки:");
-                Console.WriteLine($"1 - Обычная атака\n2 - Использовать способность ({_fighter.Ability.Cost} маны)\n3 - Сдаться");
+                Console.WriteLine($"1 - Обычная атака\n2 - Использовать способность ({_fighter.Mana} \\ {_fighter.Ability.Cost})\n3 - Сдаться");
                 strCh = Console.ReadLine();
                 if (int.TryParse(strCh, out ch))
                 {
@@ -94,16 +94,20 @@ namespace MyMiniGame.Menus
                             {
                                 _fighter.StartAttack(_enemy, EnumAttackChoise.MagicAttack);
                                 attackUsed = true;
+                                break;
                             }
                             else
+                            {
                                 Console.WriteLine("Не хватает маны.");
-                            break;
+                                continue;
+                            }
+
                         case 3:
                             _fighter.Health = 0;
                             attackUsed = true;
                             break;
                         default:
-                            break;
+                            continue;
                     }
                 }
             } while (attackUsed == false);

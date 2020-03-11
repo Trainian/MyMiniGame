@@ -10,6 +10,7 @@ namespace MyMiniGame
 {
     static class Battle
     {
+        private static int damage;
         /// <summary>
         /// Старт атаки
         /// </summary>
@@ -30,6 +31,8 @@ namespace MyMiniGame
                 default:
                     throw new NullReferenceException("Ошибка выбора атаки");
             }
+            enemy.Health -= damage;
+            FighterInfoHelper.AttackMessage(fighter, enemy, damage);
         }
 
 
@@ -40,17 +43,13 @@ namespace MyMiniGame
         /// <param name="fighterTwo">Защищающийся</param>
         private static void BaseAttack(this BaseFighter fighter, BaseFighter enemy)
         {
-            int damage = (fighter.Strength * 10) - enemy.Defence;
+            damage = (fighter.Strength * 10) - enemy.Defence;
             //Находим все Атакующие\Активные эффекты и прибавляем к атаке
             var effects = fighter.GetEffects().FindAll(x => x.IsAttackOrDeffence == true && x.IsActiveOrPassive == false);
             foreach (var effect in effects)
             {
-                damage = effect.Run(enemy,damage);
+                damage += effect.Run(enemy,damage);
             }
-            enemy.Health -= damage;
-
-            FighterInfoHelper.AttackMessage(fighter, enemy, (int)enemy.TempDamage);
-            enemy.TempDamage = 0;
         }
 
 
@@ -61,13 +60,14 @@ namespace MyMiniGame
         /// <param name="fighterTwo">Защищающийся</param>
         private static void SuperAbility(this BaseFighter fighter, BaseFighter enemy)
         {
-            fighter.Ability.Use(fighter, enemy);
+            damage = 0;
+            damage = fighter.Ability.Use(fighter, enemy);
             if(fighter.Ability.IsAttack)
             {
                 var effects = fighter.GetEffects().FindAll(x => x.IsAttackOrDeffence == true && x.IsActiveOrPassive == false && x.IsPositiveOrNegative == true);
                 foreach (var effect in effects)
                 {
-                    effect.Run(enemy, 0);
+                    damage += effect.Run(enemy, damage);
                 }
             }
         }
@@ -109,12 +109,6 @@ namespace MyMiniGame
                 if (effect.Ticks <= 0)
                     fighter.RemoveEffect(effect);
             }
-        }
-
-
-        private static bool IsDeath(BaseFighter fighter)
-        {
-            return fighter.Health <= 0;
         }
     }
 }
