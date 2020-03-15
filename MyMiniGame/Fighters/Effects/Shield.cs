@@ -16,12 +16,13 @@ namespace MyMiniGame.Fighters.Effects
 
         public string Name => "Магический Щит";
         public string FullName => "Магический щит, которой даёт небольшую защиту 10% от атаки";
-        public sbyte Ticks { get; set; }
         public bool IsAttackOrDeffence => true;
-        public bool IsPositiveOrNegative => true;
-        public bool IsActiveOrPassive => false;
+        public sbyte Ticks { get; set; }
+        public bool IsNegative => false;
         public int Run(BaseFighter fighter, int dmg)
         {
+            Console.ForegroundColor = fighter.Color;
+            System.Console.WriteLine($"{fighter.Name} использует {Name}");
             int damage = (int)(dmg / 100) * 90;
             Ticks--;
             return damage;

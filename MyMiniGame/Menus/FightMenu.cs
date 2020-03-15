@@ -29,14 +29,10 @@ namespace MyMiniGame.Menus
 
             do
             {
-                _fighter.EffectsNegative();
-                _fighter.EffectsPositive();
                 ChooseAttack();
                 if (_fighter.Health <= 0 || _enemy.Health <= 0)
                     _battleEnd = true;
 
-                _enemy.EffectsNegative();
-                _enemy.EffectsPositive();
                 EnemyAttack.Attack(_enemy,_fighter);
                 if (_fighter.Health <= 0 || _enemy.Health <= 0)
                     _battleEnd = true;

@@ -10,7 +10,11 @@ namespace MyMiniGame
 {
     static class Battle
     {
-        private static int damage;
+        private static int _damage;
+        private static BaseFighter _attacking;
+        private static BaseFighter _protecting;
+
+
         /// <summary>
         /// Старт атаки
         /// </summary>
@@ -20,19 +24,23 @@ namespace MyMiniGame
         /// <returns>true - Смерть одного из бойцов</returns>
         public static void StartAttack(this BaseFighter fighter, BaseFighter enemy, EnumAttackChoise choice)
         {
+            _attacking = fighter;
+            _protecting = enemy;
+            _damage = 0;
+
             switch (choice)
             {
                 case EnumAttackChoise.BaseAttack:
-                    fighter.BaseAttack(enemy);
+                    BaseAttack();
                     break;
                 case EnumAttackChoise.MagicAttack:
-                    fighter.SuperAbility(enemy);
+                    SuperAbility();
                     break;
                 default:
                     throw new NullReferenceException("Ошибка выбора атаки");
             }
-            enemy.Health -= damage;
-            FighterInfoHelper.AttackMessage(fighter, enemy, damage);
+            _protecting.Health -= _damage;
+            FighterInfoHelper.AttackMessage(fighter, enemy, _damage);
         }
 
 
@@ -41,15 +49,11 @@ namespace MyMiniGame
         /// </summary>
         /// <param name="fighterOne">Атакующий</param>
         /// <param name="fighterTwo">Защищающийся</param>
-        private static void BaseAttack(this BaseFighter fighter, BaseFighter enemy)
+        private static void BaseAttack()
         {
-            damage = (fighter.Strength * 10) - enemy.Defence;
-            //Находим все Атакующие\Активные эффекты и прибавляем к атаке
-            var effects = fighter.GetEffects().FindAll(x => x.IsAttackOrDeffence == true && x.IsActiveOrPassive == false);
-            foreach (var effect in effects)
-            {
-                damage += effect.Run(enemy,damage);
-            }
+            _damage = (_attacking.Strength * 10) - _protecting.Defence;
+            EffectsInAttack(_attacking);
+            EffectsInDefence(_protecting);
         }
 
 
@@ -58,40 +62,36 @@ namespace MyMiniGame
         /// </summary>
         /// <param name="fighterOne">Атакующий</param>
         /// <param name="fighterTwo">Защищающийся</param>
-        private static void SuperAbility(this BaseFighter fighter, BaseFighter enemy)
+        private static void SuperAbility()
         {
-            damage = 0;
-            damage = fighter.Ability.Use(fighter, enemy);
-            if(fighter.Ability.IsAttack)
+            _damage = _attacking.Ability.Use(_attacking, _protecting);
+            if(_attacking.Ability.IsAttack)
             {
-                var effects = fighter.GetEffects().FindAll(x => x.IsAttackOrDeffence == true && x.IsActiveOrPassive == false && x.IsPositiveOrNegative == true);
-                foreach (var effect in effects)
-                {
-                    damage += effect.Run(enemy, damage);
-                }
+                EffectsInAttack(_attacking);
+                EffectsInDefence(_protecting);
             }
         }
 
 
         /// <summary>
-        /// Запуск отрицательных эффектов
+        /// Запуск атакующих эффектов
         /// </summary>
         /// <param name="fighter">Боец</param>
-        public static void EffectsNegative(this BaseFighter fighter)
+        public static void EffectsInAttack(BaseFighter fighter)
         {
-            var negEffects = fighter?.GetEffects().FindAll(x => x.IsPositiveOrNegative == false && x.IsActiveOrPassive == false && x.IsAttackOrDeffence == false);
-            RunEffects(negEffects, fighter);
+            var attackEffects = fighter?.GetEffects().FindAll(x => x.IsAttackOrDeffence == true);
+            RunEffects(attackEffects, fighter);
         }
 
 
         /// <summary>
-        /// Запуск положительных эффектов
+        /// Запуск пзащитных эффектов
         /// </summary>
         /// <param name="fighter">Боец</param>
-        public static void EffectsPositive(this BaseFighter fighter)
+        public static void EffectsInDefence(BaseFighter fighter)
         {
-            var posEffects = fighter?.GetEffects().FindAll(x => x.IsPositiveOrNegative == true && x.IsActiveOrPassive == false && x.IsAttackOrDeffence == false);
-            RunEffects(posEffects, fighter);
+            var deffenceEffects = fighter?.GetEffects().FindAll(x => x.IsAttackOrDeffence == false);
+            RunEffects(deffenceEffects, fighter);
         }
 
 
@@ -101,13 +101,13 @@ namespace MyMiniGame
         /// </summary>
         /// <param name="effects">Лист эффектов для выполнения, Негативные или Положительные</param>
         /// <param name="fighter">Боей, чьи эффекты будут запускаться</param>
-        private static void RunEffects (List<IEffect> effects, BaseFighter fighter)
+        private static void RunEffects (List<IEffect> effects, BaseFighter fighterUseEffect)
         {
             foreach (var effect in effects)
             {
-                effect.Run(fighter, 0);
+                _damage = effect.Run(fighterUseEffect, _damage);
                 if (effect.Ticks <= 0)
-                    fighter.RemoveEffect(effect);
+                    fighterUseEffect.RemoveEffect(effect);
             }
         }
     }

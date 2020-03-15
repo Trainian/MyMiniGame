@@ -10,36 +10,43 @@ namespace MyMiniGame.Fighters.Effects.Interfaces
         /// <summary>
         /// Название эффекта
         /// </summary>
+        /// <value>Значение string</value>
         string Name { get; }
+
         /// <summary>
         /// Описание эффекта
         /// </summary>
+        /// <value>Значение string</value>
         string FullName { get; }
+        
         /// <summary>
-        /// Эффект является атакующим или защитным
-        /// True = Атакующий
-        /// False = Защитный
+        /// Эффект используется при атаке или защите
+        /// True = Атака
+        /// False = Защита
         /// </summary>
+        /// <value>Значение bool</value>
         bool IsAttackOrDeffence { get; }
+
         /// <summary>
-        /// Эффект имеет значение как позитивный или негативный
-        /// True = Позитивный
-        /// False = Негативный
+        /// Эффект является ли Негативным?
+        /// True = Является
+        /// False = Не является
         /// </summary>
-        bool IsPositiveOrNegative { get; }
+        /// <value>Значение bool</value>
+        bool IsNegative { get; }
+
         /// <summary>
-        /// Эффект является активным или пассивынм
-        /// True = Активный
-        /// False = Пассивный
+        /// Колливество использований эффекта
         /// </summary>
-        bool IsActiveOrPassive { get; }
-        /// <summary>
-        /// Тики, сколько длится действие, в ходах
-        /// </summary>
+        /// <value>Значение sbyte</value>
         sbyte Ticks { get; set; }
+
         /// <summary>
         /// Действие эффекта
         /// </summary>
+        /// <param name="fighter">Боец</param>
+        /// <param name="dmg">Урон</param>
+        /// <returns>Урон</returns>
         int Run(BaseFighter fighter, int dmg);
     }
 }
