@@ -36,6 +36,12 @@ namespace MyMiniGame.Fighters.Effects.Interfaces
         bool IsNegative { get; }
 
         /// <summary>
+        /// Эффект уже активирован ?
+        /// Используется что бы эффект был активен на следующий ход
+        ///</summary>
+        /// <value>Значение bool</value>
+        bool? IsActive {get;set;}
+        /// <summary>
         /// Колливество использований эффекта
         /// </summary>
         /// <value>Значение sbyte</value>

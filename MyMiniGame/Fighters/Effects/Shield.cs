@@ -12,6 +12,7 @@ namespace MyMiniGame.Fighters.Effects
         public Shield()
         {
             Ticks = 3;
+            IsActive = true;
         }
 
         public string Name => "Магический Щит";
@@ -19,8 +20,12 @@ namespace MyMiniGame.Fighters.Effects
         public bool IsAttackOrDeffence => true;
         public sbyte Ticks { get; set; }
         public bool IsNegative => false;
+        public bool? IsActive { get; set; }
         public int Run(BaseFighter fighter, int dmg)
         {
+            if (IsActive == null)
+            IsActive = false;
+            else IsActive = true;
             Console.ForegroundColor = fighter.Color;
             System.Console.WriteLine($"{fighter.Name} использует {Name}");
             int damage = (int)(dmg / 100) * 90;

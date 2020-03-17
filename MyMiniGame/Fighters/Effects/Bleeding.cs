@@ -18,14 +18,22 @@ namespace MyMiniGame.Fighters.Effects
         public bool IsAttackOrDeffence => false;
         public sbyte Ticks { get; set; }
         public bool IsNegative => true;
+        public bool? IsActive { get; set; }
+
         public int Run(BaseFighter fighter, int dmg)
         {
-            int damage = fighter.Health / 100 * 5;
-            Console.ForegroundColor = fighter.Color;
-            Console.WriteLine($"{fighter.Name} получает урон от кровотечения ");
-            Console.ForegroundColor = ConsoleColor.White;
-            Ticks--;
-            return damage;
+            if (IsActive == null) // Первый запуск умения, что бы не использовался
+                IsActive = true;
+            else if (IsActive == true) // Если умение активно
+            {
+                int damage = fighter.Health / 100 * 5;
+                Console.ForegroundColor = fighter.Color;
+                Console.WriteLine($"{fighter.Name} получает урон от кровотечения ");
+                Console.ForegroundColor = ConsoleColor.White;
+                Ticks--;
+                return damage;
+            }
+            return dmg;
         }
     }
 }

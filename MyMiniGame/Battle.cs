@@ -22,10 +22,10 @@ namespace MyMiniGame
         /// <param name="enemy">Защитник</param>
         /// <param name="choise">Выбор атакаи, обычная или магичская</param>
         /// <returns>true - Смерть одного из бойцов</returns>
-        public static void StartAttack(this BaseFighter fighter, BaseFighter enemy, EnumAttackChoise choice)
+        public static void StartAttack(this BaseFighter attacking, BaseFighter protecting, EnumAttackChoise choice)
         {
-            _attacking = fighter;
-            _protecting = enemy;
+            _attacking = attacking;
+            _protecting = protecting;
             _damage = 0;
 
             switch (choice)
@@ -39,37 +39,30 @@ namespace MyMiniGame
                 default:
                     throw new NullReferenceException("Ошибка выбора атаки");
             }
+
+            EffectsInAttack(_attacking);
+            EffectsInDefence(_protecting);
+
             _protecting.Health -= _damage;
-            FighterInfoHelper.AttackMessage(fighter, enemy, _damage);
+            FighterInfoHelper.AttackMessage(attacking, protecting, _damage);
         }
 
 
         /// <summary>
         /// Обычная такая
         /// </summary>
-        /// <param name="fighterOne">Атакующий</param>
-        /// <param name="fighterTwo">Защищающийся</param>
         private static void BaseAttack()
         {
-            _damage = (_attacking.Strength * 10) - _protecting.Defence;
-            EffectsInAttack(_attacking);
-            EffectsInDefence(_protecting);
+            _damage = (_attacking.Strength * 5) - _protecting.Defence;
         }
 
 
         /// <summary>
         /// Использование супер-способностей
         /// </summary>
-        /// <param name="fighterOne">Атакующий</param>
-        /// <param name="fighterTwo">Защищающийся</param>
         private static void SuperAbility()
         {
             _damage = _attacking.Ability.Use(_attacking, _protecting);
-            if(_attacking.Ability.IsAttack)
-            {
-                EffectsInAttack(_attacking);
-                EffectsInDefence(_protecting);
-            }
         }
 
 

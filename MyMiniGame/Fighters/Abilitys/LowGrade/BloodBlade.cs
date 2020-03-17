@@ -26,7 +26,9 @@ namespace MyMiniGame.Fighters.Abilitys.LowGrade
 
             fighter.Mana -= Cost;
             enemy.AddEffect(new Bleeding());
+            Console.ForegroundColor = fighter.Color;
             Console.WriteLine($"{fighter.Name} Использует BloodBLade");
+            Console.ForegroundColor = ConsoleColor.White;
             return damage;
         }
     }
