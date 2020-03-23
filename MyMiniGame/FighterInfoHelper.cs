@@ -17,9 +17,11 @@ namespace MyMiniGame
         /// <param name="dmg">Урон</param>
         public static void AttackMessage(BaseFighter fighter, BaseFighter enemy, int dmg)
         {
-            Console.ForegroundColor = fighter.Color;
-            Console.WriteLine($"{fighter.Name} нанёс {dmg} урона {enemy.Name}\n");
-            Console.ForegroundColor = ConsoleColor.White;
+            fighter.AddMessage($"{fighter.Name} нанёс {dmg} урона {enemy.Name}");
+        }
+        public static void AddMessage(this BaseFighter fighter, string str)
+        {
+            fighter.Messages.Enqueue(str);
         }
         /// <summary>
         /// Полная информация о бойце

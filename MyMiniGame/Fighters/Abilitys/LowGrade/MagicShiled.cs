@@ -21,10 +21,9 @@ namespace MyMiniGame.Fighters.Abilitys.LowGrade
         {
             int hlth = fighter.Strength * 10;
             fighter.Health += hlth;
-            Console.ForegroundColor = fighter.Color;
-            Console.WriteLine($"{fighter.Name} лечится на {hlth}");
-            Console.ForegroundColor = ConsoleColor.White;
             fighter.AddEffect(new Shield());
+            fighter.AddMessage($"{fighter.Name} лечится на {hlth}");
+            fighter.AddMessage($"{fighter.Name} получает эффект {new Shield().Name}");
             return 0;
         }
     }

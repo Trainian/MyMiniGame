@@ -5,15 +5,16 @@ using System.Collections.Generic;
 using System.Text;
 using MyMiniGame.Fighters;
 using MyMiniGame.Fighters.Enemys;
+using static MyMiniGame.Battle;
 using static MyMiniGame.Messager;
 
 namespace MyMiniGame.Menus
 {
     public class FightMenu
     {
+        String strInf = new String('-', 40);
         private BaseFighter _fighter;
         private BaseFighter _enemy;
-        private bool _battleEnd;
 
         public FightMenu(BaseFighter fighter)
         {
@@ -24,46 +25,30 @@ namespace MyMiniGame.Menus
 
         public void StartAttack()
         {
-            Console.Clear();
-            FighterInfoHelper.fightersNormalInfo(_fighter, _enemy);
-
             do
             {
+                Console.Clear();
+                FighterInfoHelper.fightersNormalInfo(_fighter, _enemy);
+
+                ConsoleMessage(_fighter);
+                ConsoleMessage(_enemy);
+                Console.WriteLine(strInf);
+
                 ChooseAttack();
                 if (_fighter.Health <= 0 || _enemy.Health <= 0)
-                    _battleEnd = true;
+                    break;
 
                 EnemyAttack.Attack(_enemy,_fighter);
                 if (_fighter.Health <= 0 || _enemy.Health <= 0)
-                    _battleEnd = true;
-
-                String str = new String('-', 40);
-                Console.WriteLine(str);
-                FighterInfoHelper.fightersNormalInfo(_fighter, _enemy);
-
-            } while (!_battleEnd);
-
-            WhoWinner();
+                    break; 
+            } while (true);
+            
+            WhoWinner(_fighter, _enemy);
 
             Console.WriteLine("\n\nДля продолжения, нажмите любую кнопку...");
             Console.ReadKey();
             //Возвращаем Жизни и Ману в норму
             _fighter.SetParametersToNormalize();
-        }
-
-        private void WhoWinner()
-        {
-            if (_fighter.Health <= 0 && _enemy.Health <= 0)
-                Console.WriteLine("Ничья");
-            else if (_fighter.Health <= 0)
-                Console.WriteLine("Вы умерли");
-            else
-            {
-                Console.WriteLine("Вы победили !");
-
-                //Опыт за бой
-                ExpUp.ExpSet(_fighter, _enemy.Level);
-            }
         }
 
         private void ChooseAttack ()

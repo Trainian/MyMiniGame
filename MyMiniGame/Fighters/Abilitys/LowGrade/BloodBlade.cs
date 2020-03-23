@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using MyMiniGame.Fighters.Abilitys.Interfaces;
 using MyMiniGame.Fighters.Classes;
 using MyMiniGame.Fighters.Effects;
+using MyMiniGame.Fighters;
 
 namespace MyMiniGame.Fighters.Abilitys.LowGrade
 {
@@ -26,9 +27,8 @@ namespace MyMiniGame.Fighters.Abilitys.LowGrade
 
             fighter.Mana -= Cost;
             enemy.AddEffect(new Bleeding());
-            Console.ForegroundColor = fighter.Color;
-            Console.WriteLine($"{fighter.Name} Использует BloodBLade");
-            Console.ForegroundColor = ConsoleColor.White;
+            fighter.AddMessage($"{fighter.Name} использует BloodBLade");
+            enemy.AddMessage($"{enemy.Name} получает эффект {new Bleeding().Name}");
             return damage;
         }
     }

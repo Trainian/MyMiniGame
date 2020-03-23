@@ -26,8 +26,7 @@ namespace MyMiniGame.Fighters.Effects
             if (IsActive == null)
             IsActive = false;
             else IsActive = true;
-            Console.ForegroundColor = fighter.Color;
-            System.Console.WriteLine($"{fighter.Name} использует {Name}");
+            fighter.AddMessage($"{fighter.Name} использует {Name}");
             int damage = (int)(dmg / 100) * 90;
             Ticks--;
             return damage;

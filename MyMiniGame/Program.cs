@@ -7,7 +7,7 @@ namespace MyMiniGame
     {
         static void Main(string[] args)
         {
-            messager += consoleMessage; // Подключяем уведомления
+            //messager += ConsoleMessage; // Подключяем уведомления
             var menu = new MainMenu(); // Создаём Меню
             menu.StartMenu(); // Запускам Меню
         }

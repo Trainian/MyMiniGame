@@ -1,6 +1,7 @@
 ﻿using MyMiniGame.Fighters.Abilitys.Interfaces;
 using MyMiniGame.Fighters.Effects.Interfaces;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 
@@ -13,11 +14,18 @@ namespace MyMiniGame.Fighters.Classes
         /// <summary>
         /// Имя персонажа, является идентификатором
         /// </summary>
+        /// <value>Строка имени</value>
         public string Name { get; set; }
         /// <summary>
         /// Цвет, которым выделяется персонаж
         /// </summary>
+        /// <value>Цвет консоли</value>
         public ConsoleColor Color { get; set; }
+        /// <summary>
+        /// Очередь сообщений
+        /// </summary>
+        /// <value>Сообщения Queue</value>
+        public Queue<String> Messages {get ;set; }
         /// <summary>
         /// Класс, определяет способности
         /// </summary>
@@ -109,6 +117,7 @@ namespace MyMiniGame.Fighters.Classes
         {
             Name = name;
             Level = 1;
+            Messages = new Queue<string>();
             SetParametersToNormalize();
         }
 
@@ -120,6 +129,7 @@ namespace MyMiniGame.Fighters.Classes
             Health = Strength * 100;
             Mana = Intellegence * 20;
             _effects = new List<IEffect>();
+            Messages.Clear();
         }
     }
 }

@@ -20,9 +20,7 @@ namespace MyMiniGame.Fighters.Abilitys.LowGrade
         {
             int hlth = (int)(fighter.Intellegence * 15);
             fighter.Mana -= Cost;
-            Console.ForegroundColor = fighter.Color;
-            Console.WriteLine($"---> {fighter.Name} лечится на {hlth}! <---");
-            Console.ForegroundColor = ConsoleColor.White;
+            fighter.AddMessage($"---> {fighter.Name} лечится на {hlth}! <---");
             fighter.Health += hlth;
             return 0;
         }

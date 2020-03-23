@@ -27,9 +27,7 @@ namespace MyMiniGame.Fighters.Effects
             else if (IsActive == true) // Если умение активно
             {
                 int damage = fighter.Health / 100 * 5;
-                Console.ForegroundColor = fighter.Color;
-                Console.WriteLine($"{fighter.Name} получает урон от кровотечения ");
-                Console.ForegroundColor = ConsoleColor.White;
+                fighter.AddMessage($"{fighter.Name} получает урон от кровотечения");
                 Ticks--;
                 return damage;
             }

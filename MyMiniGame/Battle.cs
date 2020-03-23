@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Text;
 using MyMiniGame.Menus;
 using static MyMiniGame.Messager;
+using MyMiniGame.Fighters;
 
 namespace MyMiniGame
 {
@@ -101,6 +102,21 @@ namespace MyMiniGame
                 _damage = effect.Run(fighterUseEffect, _damage);
                 if (effect.Ticks <= 0)
                     fighterUseEffect.RemoveEffect(effect);
+            }
+        }
+
+        public static void WhoWinner(BaseFighter fighter, BaseFighter enemy)
+        {
+            if (fighter.Health <= 0 && enemy.Health <= 0)
+                Console.WriteLine("Ничья");
+            else if (fighter.Health <= 0)
+                Console.WriteLine("Вы умерли");
+            else
+            {
+                Console.WriteLine("Вы победили !");
+
+                //Опыт за бой
+                ExpUp.ExpSet(fighter, enemy.Level);
             }
         }
     }
